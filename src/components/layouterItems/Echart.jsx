@@ -33,17 +33,18 @@ class Echart extends Component {
     }//初始化 state
 
     componentWillMount() {
-        this.refreshChart(this.props.item.data.panelId, this.props.item.data.chartId)
+        this.refreshChart()
     }//插入 DOM 前
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.item !== this.props.item || nextProps.theme !== this.props.theme) {
-            this.refreshChart(nextProps.item.data.panelId, this.props.item.data.chartId)
+    componentDidUpdate(prevProps) {
+        if (prevProps.item !== this.props.item || prevProps.theme !== this.props.theme) {
+            this.refreshChart()
         }
     }//接收新 prop
 
-    refreshChart = (panelId, chartId) => {
-        fetch(`${config.dataApiHost}/data/panel/chart/${config.request.token}/${panelId}/${chartId}`, {
+    refreshChart = () => {
+        fetch(`${config.dataApiHost}/data/panel/chart/${config.request.token}/
+        ${this.props.item.data.panelId}/${this.props.item.data.chartId}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -265,13 +266,14 @@ class Echart extends Component {
                         }
                         <Icon type="edit"
                               onClick={() => window.open('/editor.html?id=' + this.props.item.data.chartId, '_blank')}/>
-                        <Icon type="sync" onClick={() => this.refreshChart(this.props.item.data.chartId)}/>
+                        <Icon type="sync" onClick={this.refreshChart}/>
                     </div>
                 }
                 <div style={{width: '100%', height: '100%'}} className={this.props.theme}>
                     {
                         this.state.type !== 'table' &&
-                        <div style={{width: '100%', height: '100%'}} ref="chart"></div>
+                        <div style={{width: '100%', height: '100%'}} ref="chart">
+                        </div>
                     }
                     {
                         this.state.type === 'table' &&

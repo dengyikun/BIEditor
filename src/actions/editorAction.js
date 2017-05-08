@@ -95,16 +95,8 @@ const actions = {
 
     getChart: (callback) => (dispatch, getState) => {
         const data = getState().dataSet
-        let url
-        if (data.type == 'table') {
-            url = `${config.dataApiHost}/data/table/data/${config.request.token}`
-        } else if (data.type == 'map-china-dataRange') {
-            url = `${config.dataApiHost}/data/map/data/${config.request.token}`
-        } else {
-            url = `${config.dataApiHost}/data/other/data/${config.request.token}`
-        }
 
-        fetch(url, {
+        fetch(`${config.dataApiHost}/data/all/data/${config.request.token}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

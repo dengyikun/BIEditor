@@ -1,6 +1,7 @@
 @import "main";
 
 $headerHeight: 50px;
+$leftAsideWidth: 210px;
 $rightAsideWidth: 245px;
 
 //index
@@ -12,10 +13,24 @@ html, body{
 }
 
 #editor {
+    width: 100%;
+    height: 100%;
+
+    .ant-spin-nested-loading {
+        width: 100%;
+        height: 100%;
+
+        .ant-spin-container {
+            width: 100%;
+            height: 100%;
+        }
+    }
 
     .wrapper {
         width: 100%;
+        height: 100%;
         padding-top: $headerHeight;
+        padding-left: $leftAsideWidth;
         padding-right: $rightAsideWidth;
         position: relative;
 
@@ -23,30 +38,40 @@ html, body{
             height: $headerHeight;
             width: 100%;
             line-height: $headerHeight;
-            background-color: #fff;
-            position: absolute;
+            background: #000;
+            position: fixed;
             top:0;
             left: 0;
             z-index: $headerIndex;
 
             .logo {
                 height: 100%;
-                width: 245px;
+                width: $leftAsideWidth;
                 background-image: url('../images/logo.png');
             }
         }
 
+        .left-aside {
+            height: 100%;
+            width: $leftAsideWidth;
+            position: fixed;
+            background-color: #f1f0f6;
+            top: 0;
+            left: 0;
+            z-index: $rightAsideIndex;
+            padding: $gap-md + 50px $gap-md $gap-md $gap-md;
+        }
+
         .content-wrapper {
             width: 100%;
-            min-height: 900px;
-            padding: $gap-lg $gap-md;
+            height: 100%;
 
             .field-panel{
                 width: 100%;
                 background-color: #f3f3f3;
 
                 .field-item{
-                    min-height: 50px;
+                    height: 40px;
                     width: 100%;
                     border-bottom: 1px solid #d7d7d7;
                     background-color: #f3f3f3;
@@ -82,13 +107,13 @@ html, body{
                 }
 
                 .field-item-title{
+                    height: 50px;
                     padding: $gap-sm $gap-md;
                     font-size: 16px;
                     color: #000;
 
                     button{
-                        float: right;
-                        margin-left: $gap-md;
+                        margin-right: $gap-md;
                         border-radius: 0;
 
                         a{
@@ -103,6 +128,7 @@ html, body{
                 }
 
                 .field-item-col{
+                    height: auto;
                     padding-right: 85px + $gap-md * 2;
                     position: relative;
 
@@ -116,7 +142,7 @@ html, body{
             }
 
             .data-code-panel{
-                height: 150px;
+                height: 140px;
                 width: 100%;
                 background-color: #fff;
                 resize: none;
@@ -124,9 +150,8 @@ html, body{
             }
 
             .chart-panel{
-                height: 500px;
+                height: calc(100% - 280px);
                 width: 100%;
-                margin-top: $gap-sm;
                 background-color: #fff;
 
                 .chart-content{
@@ -158,8 +183,8 @@ html, body{
         .right-aside {
             height: 100%;
             width: $rightAsideWidth;
-            padding: $headerHeight+$gap-lg $gap-md $gap-lg 0;
-            position: absolute;
+            padding: $headerHeight 0 0 0;
+            position: fixed;
             top: 0;
             right: 0;
             z-index: $rightAsideIndex;

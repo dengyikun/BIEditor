@@ -158,9 +158,8 @@ class CodeContentUI extends Component {
             <div className="content-wrapper">
                 <div className="field-panel">
                     <div className="field-item field-item-title">
-                        数据源：{dataSet.sourceId}
+                        <Button icon="upload" type="ghost" size="large">拖拽模式</Button>
                         <Button icon="code" type="ghost" size="large">代码模式</Button>
-                        <Button icon="upload" type="primary" size="large">拖拽模式</Button>
                     </div>
                     <div className="field-item field-item-row">
                         列(维度)&nbsp;&nbsp;

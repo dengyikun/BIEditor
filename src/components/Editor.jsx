@@ -78,9 +78,11 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-line">
                                         <div className="chart-set-select-line-stack"
-                                             onClick={() => setChartType("line-stack")}></div>
+                                             onClick={() => setChartType("line-stack")}>
+                                        </div>
                                         <div className="chart-set-select-area-stack"
-                                             onClick={() => setChartType("area-stack")}></div>
+                                             onClick={() => setChartType("area-stack")}>
+                                        </div>
                                     </div>
                                 }>
                                     <Button icon="line-chart" type="ghost" size="large">折线图</Button>
