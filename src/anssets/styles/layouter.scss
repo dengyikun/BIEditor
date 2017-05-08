@@ -1,0 +1,344 @@
+@import "main";
+
+$headerHeight: 50px;
+$leftAsideWidth: 210px;
+
+//index
+$headerIndex: 900;
+$rightAsideIndex: 800;
+
+#layouter {
+  width: 100%;
+  height: 100%;
+
+  > div {
+    width: 100%;
+    height: 100%;
+
+    > div {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    padding-top: $headerHeight;
+    padding-left: $leftAsideWidth;
+    position: relative;
+
+    header {
+      height: $headerHeight;
+      width: 100%;
+      line-height: $headerHeight;
+      background: #000;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: $headerIndex;
+
+      .logo {
+        height: 100%;
+        width: $leftAsideWidth;
+        background-image: url('../images/logo.png');
+      }
+    }
+
+    .left-aside {
+      height: 100%;
+      width: $leftAsideWidth;
+      position: absolute;
+      background-color: #f1f0f6;
+      top: 0;
+      left: 0;
+      z-index: $rightAsideIndex;
+      padding: $gap-md + 50px $gap-md $gap-md $gap-md;
+
+      .control-panel {
+        width: 100%;
+
+        .control-panel-title {
+          width: 100%;
+          font-size: 16px;
+          font-weight: bolder;
+          margin-top: $gap-sm;
+        }
+
+        button {
+          width: calc(50% - #{$gap-md / 2});
+          height: 26px;
+          font-size: 13px;
+          background-color: transparent;
+          margin-top: $gap-md;
+          border-color: #000;
+          @include box-shadow(0 3px 5px -2px rgba(0, 0, 0, 0.4));
+
+          &:nth-child(2) {
+            margin-right: $gap-md;
+          }
+        }
+
+        .ant-input-preSuffix-wrapper {
+          margin-top: $gap-md;
+        }
+      }
+
+      .chart-panel {
+        width: 100%;
+        height: calc(100% - 126px - #{$gap-sm});
+        margin-top: $gap-sm;
+
+        li {
+          cursor: pointer;
+
+          p {
+            font-size: 13px;
+            margin: $gap-xs 0;
+            @include single;
+
+            i {
+              color: #108ee9;
+              margin-right: $gap-sm;
+            }
+          }
+        }
+      }
+    }
+
+    .content-wrapper {
+      width: 100%;
+      height: 100%;
+      background-color: #dde1e7;
+
+      .title-panel {
+        width: 100%;
+        height: 40px;
+        border-bottom: 1px solid #cccccc;
+        padding: $gap-xs $gap-md;
+        z-index: 2;
+        @include box-shadow(0 5px 20px 0px rgba(0, 0, 0, 0.1));
+
+        .title-panel-btns {
+
+          > * {
+
+            float: right;
+          }
+
+          a.title-panel-btn {
+            height: 20px;
+            line-height: 20px;
+            font-size: 16px;
+            color: #777;
+            padding: 0 $gap-sm;
+            margin: 5px 0;
+            border-right: #ddd solid 1px;
+
+            &:first-child {
+              border-left: #ddd solid 1px;
+            }
+          }
+
+          i {
+            line-height: 30px;
+            font-size: 16px;
+            color: #777;
+            margin-left: $gap-md;
+          }
+        }
+      }
+
+      .layout-panel {
+        width: 100%;
+        height: calc(100% - 40px);
+
+        .layout-panel-scrollbar {
+
+          .react-grid-layout {
+            width: 100%;
+            position: relative;
+            //background: -webkit-linear-gradient(top, transparent 9px, rgba(0, 0, 0, 0.05) 9.5px, transparent 10px),
+            //-webkit-linear-gradient(left, transparent 9px, rgba(0, 0, 0, 0.05) 9.5px, transparent 10px);
+            //background-size: calc((100% - 490px) / 50 + 10px) 30px;
+
+            .react-grid-placeholder {
+              background-color: #d2eafb;
+            }
+
+            .react-grid-item {
+
+              &:not(.react-grid-placeholder) {
+                z-index: 1;
+                border: 1px dashed transparent;
+
+                .toolbar {
+                  position: absolute;
+                  width: auto;
+                  height: 30px;
+                  right: 0;
+                  padding: 6px 10px;
+                  font-size: 18px;
+                  display: none;
+                  color: #777777;
+                  z-index: 1;
+
+                  i {
+                    cursor: pointer;
+                    float: right;
+                    margin-left: 10px;
+                  }
+                }
+
+                .react-resizable-handle {
+                  position: absolute;
+                  width: 20px;
+                  height: 20px;
+                  bottom: 0;
+                  right: 0;
+                  cursor: se-resize;
+                }
+
+                &:hover {
+                  border: 1px dashed #999;
+
+                  .toolbar {
+                    display: inline-block;
+                  }
+
+                  .react-resizable-handle {
+                    background: url("../images/layouter-resize-icon.png") no-repeat left top;
+                    background-size: 80% 80%;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.chrome-picker .ant-popover-inner-content {
+  padding: 0;
+}
+
+.echart-style-dark {
+  width: 190px;
+  height: 190px;
+  margin: 10px 10px 10px 0;
+  background: url("../images/echart-style-dark.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-dark.png");
+    background-size: 100% 100%;
+  }
+}
+
+.echart-style-infographic {
+  width: 190px;
+  height: 190px;
+  background: url("../images/echart-style-infographic.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-infographic.png");
+    background-size: 100% 100%;
+  }
+}
+
+.echart-style-macarons {
+  width: 190px;
+  height: 190px;
+  margin: 0 10px 10px 0;
+  background: url("../images/echart-style-macarons.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-macarons.png");
+    background-size: 100% 100%;
+  }
+}
+
+.echart-style-roma {
+  width: 190px;
+  height: 190px;
+  background: url("../images/echart-style-roma.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-roma.png");
+    background-size: 100% 100%;
+  }
+}
+
+.echart-style-shine {
+  width: 190px;
+  height: 190px;
+  margin: 0 10px 0 0;
+  background: url("../images/echart-style-shine.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-shine.png");
+    background-size: 100% 100%;
+  }
+}
+
+.echart-style-vintage {
+  width: 190px;
+  height: 190px;
+  background: url("../images/echart-style-vintage.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-vintage.png");
+    background-size: 100% 100%;
+  }
+}
+
+.ql-editor {
+  padding: 20px;
+}
+
+.dark {
+  background: #333 !important;
+
+  thead {
+
+    th {
+      background: #333;
+      color: #fff;
+    }
+  }
+
+  .ant-table-title {
+    color: #fff;
+  }
+
+  tbody {
+    color: #fff;
+  }
+}
+
+.infographic {
+  background: #ffffff !important;
+}
+
+.macarons {
+  background: #ffffff !important;
+}
+
+.roma {
+  background: #ffffff !important;
+}
+
+.shine {
+  background: #ffffff !important;
+}
+
+.vintage {
+  background: #fef8ef !important;
+}

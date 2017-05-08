@@ -1,0 +1,58 @@
+$mainColor: #108ee9;
+$gap-lg: 40px;
+$gap-md: 20px;
+$gap-sm: 10px;
+$gap-xs: 5px;
+
+@mixin background-set($color: transparent,$position: center,$repeat: no-repeat,$size: cover) {
+  background-color: $color;
+  background-position: $position;
+  background-repeat: $repeat;
+  background-size: $size;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin border-custom($ver, $hor, $radius) {
+  -webkit-border-#{$ver}-#{$hor}-radius: $radius;
+  -moz-border-radius-#{$ver}#{$hor}: $radius;
+  border-#{$ver}-#{$hor}-radius: $radius;
+}
+
+@mixin box-shadow($shadow){
+  -webkit-box-shadow: $shadow;
+  -moz-box-shadow: $shadow;
+  box-shadow: $shadow;
+}
+
+@mixin clearfix{
+  &::after {
+    clear: both;
+    display: table;
+    content: " ";
+  }
+}
+
+@mixin single{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ant-modal-header {
+  background-color: #f1f0f6;
+  padding: 14px 20px;
+
+  .ant-modal-title {
+    font-size: 15px;
+    font-weight: normal;
+  }
+}
+
+.ant-modal-content {
+  border-radius: 0;
+}

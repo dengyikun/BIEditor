@@ -1,0 +1,292 @@
+@import "main";
+
+$headerHeight: 50px;
+$rightAsideWidth: 245px;
+
+//index
+$headerIndex: 900;
+$rightAsideIndex: 800;
+
+html, body{
+    background-color: #e1e2e8;
+}
+
+#editor {
+
+    .wrapper {
+        width: 100%;
+        padding-top: $headerHeight;
+        padding-right: $rightAsideWidth;
+        position: relative;
+
+        header {
+            height: $headerHeight;
+            width: 100%;
+            line-height: $headerHeight;
+            background-color: #fff;
+            position: absolute;
+            top:0;
+            left: 0;
+            z-index: $headerIndex;
+
+            .logo {
+                height: 100%;
+                width: 245px;
+                background-image: url('../images/logo.png');
+            }
+        }
+
+        .content-wrapper {
+            width: 100%;
+            min-height: 900px;
+            padding: $gap-lg $gap-md;
+
+            .field-panel{
+                width: 100%;
+                background-color: #f3f3f3;
+
+                .field-item{
+                    min-height: 50px;
+                    width: 100%;
+                    border-bottom: 1px solid #d7d7d7;
+                    background-color: #f3f3f3;
+                    padding: $gap-sm $gap-md;
+
+                    .ant-tag{
+                        height: 26px;
+                        line-height: 25px;
+                        color: #fff;
+                        margin: 0 20px 0 0;
+                        padding-right: 30px;
+                        border: none;
+                        border-radius: 0;
+                        background: linear-gradient(-135deg, transparent 5px, #108ee9 0);
+                        position: relative;
+
+                        i{
+                            color: #fff;
+                            font-size: 18px;
+                            position: absolute;
+                            right: 8px;
+                            top: 3px;
+                        }
+                    }
+
+                    button{
+                        border-style: solid;
+                    }
+
+                    input{
+                        height: 28px;
+                    }
+                }
+
+                .field-item-title{
+                    padding: $gap-sm $gap-md;
+                    font-size: 16px;
+                    color: #000;
+
+                    button{
+                        float: right;
+                        margin-left: $gap-md;
+                        border-radius: 0;
+
+                        a{
+                            color: #fff;
+                            margin-left: 0.5em;
+                        }
+                    }
+
+                    .ant-btn-ghost{
+                        background: #ffffff;
+                    }
+                }
+
+                .field-item-col{
+                    padding-right: 85px + $gap-md * 2;
+                    position: relative;
+
+                    .refresh-chart {
+                        border-radius: 0;
+                        position: absolute;
+                        right: $gap-md;
+                        top: 9px;
+                    }
+                }
+            }
+
+            .data-code-panel{
+                height: 150px;
+                width: 100%;
+                background-color: #fff;
+                resize: none;
+                border-radius: 0!important;
+            }
+
+            .chart-panel{
+                height: 500px;
+                width: 100%;
+                margin-top: $gap-sm;
+                background-color: #fff;
+
+                .chart-content{
+                    width: 100%;
+                    height: 100%;
+                    padding: $gap-sm $gap-md;
+
+                    .e-chart{
+                        width: 100%;
+                        height: 100%;
+                    }
+
+                    .table{
+                        width: 100%;
+                        height: 100%;
+
+                        thead th{
+                            text-align: center;
+                        }
+
+                        tbody tr{
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
+
+        .right-aside {
+            height: 100%;
+            width: $rightAsideWidth;
+            padding: $headerHeight+$gap-lg $gap-md $gap-lg 0;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: $rightAsideIndex;
+
+            .chart-set-panel{
+                height: 100%;
+                width: 100%;
+                background-color: #fff;
+
+                button{
+                    width: $rightAsideWidth - 3 * $gap-md;
+                    border-radius: 0;
+                }
+
+                hr{
+                    border: 0;
+                    border-bottom: 1px solid #d7d7d7;
+                }
+
+                .chart-set-save{
+                    margin: $gap-sm $gap-md;
+                }
+
+                .chart-set-title-label{
+                    font-size: 16px;
+                    padding: $gap-sm $gap-md;
+                }
+
+                .chart-set-title{
+                    margin-top: $gap-xs;
+                }
+
+                .chart-set-select {
+                    padding: $gap-sm $gap-md;
+
+                    button{
+                        border-bottom: 0;
+
+                        &:last-child{
+                            border-bottom: 1px solid #d9d9d9;
+                        }
+
+                        &:hover{
+                            background-color: $mainColor;
+                            border-color: $mainColor;
+                            color: #fff;
+                        }
+
+                        span{
+                            padding-left: 1em;
+                        }
+                    }
+                }
+
+                .chart-set-style {
+                    padding: $gap-sm $gap-md;
+
+                    .ant-form-item {
+                        margin-bottom: $gap-xs;
+                    }
+                }
+            }
+        }
+    }
+}
+
+body .chart-set-select-item {
+    div{
+        height: 120px;
+        width: 150px;
+        display: inline-block;
+        margin-right: $gap-sm;
+        border: 3px solid transparent;
+
+        &:last-child{
+            margin-right: 0;
+        }
+
+        &:hover{
+            border-color: $mainColor;
+        }
+    }
+
+    &.chart-set-select-table{
+        .chart-set-select-table{
+        }
+    }
+
+    &.chart-set-select-line{
+        .chart-set-select-line-stack{
+            background-image: url("../images/line-stack.png");
+        }
+
+        .chart-set-select-area-stack{
+            background-image: url("../images/area-stack.png");
+        }
+    }
+
+    &.chart-set-select-bar{
+        .chart-set-select-bar-tick-align{
+            background-image: url("../images/bar-tick-align.png");
+        }
+
+        .chart-set-select-bar-y-category{
+            background-image: url("../images/bar-y-category.png");
+        }
+    }
+
+    &.chart-set-select-pie{
+        .chart-set-select-pie-simple{
+            background-image: url("../images/pie-simple.png");
+        }
+
+        .chart-set-select-pie-doughnut{
+            background-image: url("../images/pie-doughnut.png");
+        }
+    }
+
+    &.chart-set-select-strip{
+    }
+
+    &.chart-set-select-filter{
+    }
+
+    &.chart-set-select-map{
+        .chart-set-select-map-china-dataRange{
+            background-image: url("../images/map-china-dataRange.png");
+        }
+    }
+}

@@ -1,0 +1,81 @@
+@import "main";
+
+html, body {
+  background-color: #dde1e7;
+}
+
+#player {
+  height: 100%;
+
+  .ant-spin-nested-loading {
+    height: 100%;
+
+    .ant-spin-container {
+      height: 100%;
+
+      .layout-panel-scrollbar {
+
+        .react-grid-layout {
+          width: 100%;
+          height: 100%;
+          position: relative;
+
+          .react-grid-placeholder {
+            background-color: #d2eafb;
+          }
+
+          .react-grid-item {
+
+            &:not(.react-grid-placeholder) {
+              z-index: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.ql-editor {
+  padding: 20px;
+}
+
+.dark {
+  background: #333!important;
+
+  thead {
+
+    th {
+      background: #333;
+      color: #fff;
+    }
+  }
+
+  .ant-table-title {
+    color: #fff;
+  }
+
+  tbody {
+    color: #fff;
+  }
+}
+
+.infographic {
+  background: #ffffff!important;
+}
+
+.macarons {
+  background: #ffffff!important;
+}
+
+.roma {
+  background: #ffffff!important;
+}
+
+.shine {
+  background: #ffffff!important;
+}
+
+.vintage {
+  background: #fef8ef!important;
+}

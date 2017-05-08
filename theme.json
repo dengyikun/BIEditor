@@ -1,0 +1,7 @@
+{
+  "primary-color": "#5290de",
+  "btn-danger-bg": "#cc765c",
+  "btn-border-radius-base": "2px",
+  "btn-padding-lg": "4px 30px 5px 30px",
+  "btn-border-radius-sm": "2px"
+}
