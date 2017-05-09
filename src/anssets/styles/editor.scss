@@ -8,310 +8,323 @@ $rightAsideWidth: 245px;
 $headerIndex: 900;
 $rightAsideIndex: 800;
 
-html, body{
-    background-color: #e1e2e8;
+html, body {
+  background-color: #e1e2e8;
 }
 
 #editor {
+  width: 100%;
+  height: 100%;
+
+  .ant-spin-nested-loading {
     width: 100%;
     height: 100%;
 
-    .ant-spin-nested-loading {
-        width: 100%;
-        height: 100%;
+    .ant-spin-container {
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-        .ant-spin-container {
-            width: 100%;
-            height: 100%;
-        }
+  .wrapper {
+    width: 100%;
+    height: 100%;
+    padding-top: $headerHeight;
+    padding-left: $leftAsideWidth;
+    padding-right: $rightAsideWidth;
+    position: relative;
+
+    header {
+      height: $headerHeight;
+      width: 100%;
+      line-height: $headerHeight;
+      background: #000;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: $headerIndex;
+
+      .logo {
+        height: 100%;
+        width: $leftAsideWidth;
+        background-image: url('../images/logo.png');
+      }
     }
 
-    .wrapper {
-        width: 100%;
-        height: 100%;
-        padding-top: $headerHeight;
-        padding-left: $leftAsideWidth;
-        padding-right: $rightAsideWidth;
-        position: relative;
-
-        header {
-            height: $headerHeight;
-            width: 100%;
-            line-height: $headerHeight;
-            background: #000;
-            position: fixed;
-            top:0;
-            left: 0;
-            z-index: $headerIndex;
-
-            .logo {
-                height: 100%;
-                width: $leftAsideWidth;
-                background-image: url('../images/logo.png');
-            }
-        }
-
-        .left-aside {
-            height: 100%;
-            width: $leftAsideWidth;
-            position: fixed;
-            background-color: #f1f0f6;
-            top: 0;
-            left: 0;
-            z-index: $rightAsideIndex;
-            padding: $gap-md + 50px $gap-md $gap-md $gap-md;
-        }
-
-        .content-wrapper {
-            width: 100%;
-            height: 100%;
-
-            .field-panel{
-                width: 100%;
-                background-color: #f3f3f3;
-
-                .field-item{
-                    height: 40px;
-                    width: 100%;
-                    border-bottom: 1px solid #d7d7d7;
-                    background-color: #f3f3f3;
-                    padding: $gap-sm $gap-md;
-
-                    .ant-tag{
-                        height: 26px;
-                        line-height: 25px;
-                        color: #fff;
-                        margin: 0 20px 0 0;
-                        padding-right: 30px;
-                        border: none;
-                        border-radius: 0;
-                        background: linear-gradient(-135deg, transparent 5px, #108ee9 0);
-                        position: relative;
-
-                        i{
-                            color: #fff;
-                            font-size: 18px;
-                            position: absolute;
-                            right: 8px;
-                            top: 3px;
-                        }
-                    }
-
-                    button{
-                        border-style: solid;
-                    }
-
-                    input{
-                        height: 28px;
-                    }
-                }
-
-                .field-item-title{
-                    height: 50px;
-                    padding: $gap-sm $gap-md;
-                    font-size: 16px;
-                    color: #000;
-
-                    button{
-                        margin-right: $gap-md;
-                        border-radius: 0;
-
-                        a{
-                            color: #fff;
-                            margin-left: 0.5em;
-                        }
-                    }
-
-                    .ant-btn-ghost{
-                        background: #ffffff;
-                    }
-                }
-
-                .field-item-col{
-                    height: auto;
-                    padding-right: 85px + $gap-md * 2;
-                    position: relative;
-
-                    .refresh-chart {
-                        border-radius: 0;
-                        position: absolute;
-                        right: $gap-md;
-                        top: 9px;
-                    }
-                }
-            }
-
-            .data-code-panel{
-                height: 140px;
-                width: 100%;
-                background-color: #fff;
-                resize: none;
-                border-radius: 0!important;
-            }
-
-            .chart-panel{
-                height: calc(100% - 280px);
-                width: 100%;
-                background-color: #fff;
-
-                .chart-content{
-                    width: 100%;
-                    height: 100%;
-                    padding: $gap-sm $gap-md;
-
-                    .e-chart{
-                        width: 100%;
-                        height: 100%;
-                    }
-
-                    .table{
-                        width: 100%;
-                        height: 100%;
-
-                        thead th{
-                            text-align: center;
-                        }
-
-                        tbody tr{
-                            text-align: center;
-                        }
-                    }
-                }
-            }
-        }
-
-        .right-aside {
-            height: 100%;
-            width: $rightAsideWidth;
-            padding: $headerHeight 0 0 0;
-            position: fixed;
-            top: 0;
-            right: 0;
-            z-index: $rightAsideIndex;
-
-            .chart-set-panel{
-                height: 100%;
-                width: 100%;
-                background-color: #fff;
-
-                button{
-                    width: $rightAsideWidth - 3 * $gap-md;
-                    border-radius: 0;
-                }
-
-                hr{
-                    border: 0;
-                    border-bottom: 1px solid #d7d7d7;
-                }
-
-                .chart-set-save{
-                    margin: $gap-sm $gap-md;
-                }
-
-                .chart-set-title-label{
-                    font-size: 16px;
-                    padding: $gap-sm $gap-md;
-                }
-
-                .chart-set-title{
-                    margin-top: $gap-xs;
-                }
-
-                .chart-set-select {
-                    padding: $gap-sm $gap-md;
-
-                    button{
-                        border-bottom: 0;
-
-                        &:last-child{
-                            border-bottom: 1px solid #d9d9d9;
-                        }
-
-                        &:hover{
-                            background-color: $mainColor;
-                            border-color: $mainColor;
-                            color: #fff;
-                        }
-
-                        span{
-                            padding-left: 1em;
-                        }
-                    }
-                }
-
-                .chart-set-style {
-                    padding: $gap-sm $gap-md;
-
-                    .ant-form-item {
-                        margin-bottom: $gap-xs;
-                    }
-                }
-            }
-        }
+    .left-aside {
+      height: 100%;
+      width: $leftAsideWidth;
+      position: fixed;
+      background-color: #f1f0f6;
+      top: 0;
+      left: 0;
+      z-index: $rightAsideIndex;
+      padding: $gap-md + 50px $gap-md $gap-md $gap-md;
     }
+
+    .content-wrapper {
+      width: 100%;
+      height: 100%;
+      background-color: #dbe2e7;
+
+      .content-wrapper-title {
+        width: 100%;
+        padding: $gap-md $gap-lg;
+        color: #000;
+        font-size: 13px;
+        @include box-shadow(0 5px 20px 0px rgba(0, 0, 0, 0.1));
+
+        div {
+          margin-right: $gap-md;
+          display: inline-block;
+
+          &.active {
+            color: $mainColor;
+          }
+        }
+
+        .ant-btn-ghost {
+          background: #ffffff;
+        }
+      }
+
+      .field-panel {
+        width: 100%;
+        font-size: 13px;
+        padding: 0 $gap-md;
+
+        .field-item {
+          width: 100%;
+          border-bottom: 1px solid #c3cacf;
+          padding: $gap-sm $gap-md;
+
+          .ant-tag {
+            height: 26px;
+            line-height: 25px;
+            color: #fff;
+            margin: 0 20px 0 0;
+            padding-right: 30px;
+            border: none;
+            border-radius: 0;
+            background: linear-gradient(-135deg, transparent 5px, #{$mainColor} 0);
+            position: relative;
+
+            i {
+              color: #fff;
+              font-size: 18px;
+              position: absolute;
+              right: 8px;
+              top: 3px;
+            }
+          }
+
+          button {
+            border-style: solid;
+          }
+
+          input {
+            height: 28px;
+          }
+        }
+
+        .field-item-col {
+          height: auto;
+          padding-right: 85px + $gap-md * 2;
+          position: relative;
+
+          .refresh-chart {
+            border-radius: 0;
+            position: absolute;
+            right: $gap-md;
+            top: 9px;
+          }
+        }
+      }
+
+      .data-code-panel {
+        height: 140px;
+        width: 100%;
+        padding: $gap-sm $gap-md;
+
+        textarea {
+          width: 100%;
+          height: 100%;
+          resize: none;
+          border-radius: 0 !important;
+        }
+      }
+
+      .chart-panel {
+        height: calc(100% - 280px);
+        width: 100%;
+        padding: $gap-lg $gap-md $gap-sm $gap-md;
+
+        .chart-content {
+          width: 100%;
+          height: 100%;
+          background-color: #fff;
+
+          .e-chart {
+            width: 100%;
+            height: 100%;
+          }
+
+          .table {
+            width: 100%;
+            height: 100%;
+
+            thead th {
+              text-align: center;
+            }
+
+            tbody tr {
+              text-align: center;
+            }
+          }
+        }
+      }
+    }
+
+    .right-aside {
+      height: 100%;
+      width: $rightAsideWidth;
+      padding: $headerHeight 0 0 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: $rightAsideIndex;
+      background-color: #e4e7e9;
+      border-left: 1px solid #c3cacf;
+
+
+
+
+      .chart-set-panel {
+        height: 100%;
+        width: 100%;
+
+        button {
+          width: $rightAsideWidth - 2 * $gap-md;
+          border-radius: 0;
+        }
+
+        hr {
+          border: 0;
+          border-bottom: 1px solid #d7d7d7;
+        }
+
+        .chart-set-save {
+          margin: $gap-sm $gap-md;
+        }
+
+        .chart-set-title-label {
+          font-size: 16px;
+          padding: $gap-sm $gap-md;
+        }
+
+        .chart-set-title {
+          margin-top: $gap-xs;
+          background-color: transparent;
+          border: none;
+          border-bottom: 1px solid #d7d7d7;
+          @include border-radius(0)
+        }
+
+        .chart-set-select {
+          padding: $gap-sm $gap-md;
+
+          button {
+            width: 140px;
+            margin: 0 auto;
+            display: block;
+            color: $mainColor;
+            border: none;
+            @include border-radius(5px);
+
+            &:hover {
+              border: 1px solid #d9d9d9;
+            }
+
+            span {
+              padding-left: 1em;
+            }
+          }
+        }
+
+        .chart-set-style {
+          padding: $gap-sm $gap-md;
+
+          .ant-form-item {
+            margin-bottom: $gap-xs;
+          }
+        }
+      }
+    }
+  }
 }
 
 body .chart-set-select-item {
-    div{
-        height: 120px;
-        width: 150px;
-        display: inline-block;
-        margin-right: $gap-sm;
-        border: 3px solid transparent;
+  div {
+    height: 60px;
+    width: 80px;
+    display: inline-block;
+    margin-right: $gap-sm;
+    border: 1px solid transparent;
+    background-size: 100% 100%;
 
-        &:last-child{
-            margin-right: 0;
-        }
-
-        &:hover{
-            border-color: $mainColor;
-        }
+    &:last-child {
+      margin-right: 0;
     }
 
-    &.chart-set-select-table{
-        .chart-set-select-table{
-        }
+    &:hover {
+      border-color: $mainColor;
+    }
+  }
+
+  &.chart-set-select-table {
+    .chart-set-select-table {
+    }
+  }
+
+  &.chart-set-select-line {
+    .chart-set-select-line-stack {
+      background-image: url("../images/line-stack.png");
     }
 
-    &.chart-set-select-line{
-        .chart-set-select-line-stack{
-            background-image: url("../images/line-stack.png");
-        }
+    .chart-set-select-area-stack {
+      background-image: url("../images/area-stack.png");
+    }
+  }
 
-        .chart-set-select-area-stack{
-            background-image: url("../images/area-stack.png");
-        }
+  &.chart-set-select-bar {
+    .chart-set-select-bar-tick-align {
+      background-image: url("../images/bar-tick-align.png");
     }
 
-    &.chart-set-select-bar{
-        .chart-set-select-bar-tick-align{
-            background-image: url("../images/bar-tick-align.png");
-        }
+    .chart-set-select-bar-y-category {
+      background-image: url("../images/bar-y-category.png");
+    }
+  }
 
-        .chart-set-select-bar-y-category{
-            background-image: url("../images/bar-y-category.png");
-        }
+  &.chart-set-select-pie {
+    .chart-set-select-pie-simple {
+      background-image: url("../images/pie-simple.png");
     }
 
-    &.chart-set-select-pie{
-        .chart-set-select-pie-simple{
-            background-image: url("../images/pie-simple.png");
-        }
-
-        .chart-set-select-pie-doughnut{
-            background-image: url("../images/pie-doughnut.png");
-        }
+    .chart-set-select-pie-doughnut {
+      background-image: url("../images/pie-doughnut.png");
     }
+  }
 
-    &.chart-set-select-strip{
-    }
+  &.chart-set-select-strip {
+  }
 
-    &.chart-set-select-filter{
-    }
+  &.chart-set-select-filter {
+  }
 
-    &.chart-set-select-map{
-        .chart-set-select-map-china-dataRange{
-            background-image: url("../images/map-china-dataRange.png");
-        }
+  &.chart-set-select-map {
+    .chart-set-select-map-china-dataRange {
+      background-image: url("../images/map-china-dataRange.png");
     }
+  }
 }

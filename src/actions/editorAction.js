@@ -2,9 +2,8 @@ import config from '../config'
 
 const actions = {
 
-    getCodeData: (chartId, model, callback) => (dispatch) => {
-        model = model == 'drag' ? 1 : 2
-        fetch(`${config.mgmtApiHost}/chart/get/${config.request.token}/${chartId}/${model}`, {
+    getCodeData: (chartId, callback) => (dispatch) => {
+        fetch(`${config.dataApiHost}/data/chart/${config.request.token}/${chartId}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -31,6 +30,7 @@ const actions = {
                             name: "null",
                             sort: "降序"
                         }],
+                        model: data.data.model || 2,
                         values: data.data.values || []
                     }
                     dispatch({
@@ -58,13 +58,12 @@ const actions = {
     saveChart: (callback) => (dispatch, getState) => {
         const dataSet = getState().dataSet
         const chartSet = getState().chartSet
-        const editorType = getState().editorType
         const data = {
             chartId: chartSet.chartId,
             title: chartSet.title,
             style: JSON.stringify(chartSet.style),
             number: 0,
-            model: editorType == 'drag' ? 1 : 2,
+            model: dataSet.model,
             filter: '',
             relevanceTable: '',
             type: dataSet.type,
@@ -96,7 +95,8 @@ const actions = {
     getChart: (callback) => (dispatch, getState) => {
         const data = getState().dataSet
 
-        fetch(`${config.dataApiHost}/data/all/data/${config.request.token}`, {
+
+        fetch(`${config.dataApiHost}/data/all/${config.request.token}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',

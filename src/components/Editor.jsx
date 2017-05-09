@@ -12,7 +12,6 @@ import editorAction from '../actions/editorAction';
 import config from '../config'
 
 const mapStateToProps = (state) => ({
-    editorType: state.editorType,
     dataSet: state.dataSet,
     chartSet: state.chartSet,
     chart: state.chart
@@ -36,14 +35,14 @@ class EditorUI extends Component {
     }//初始化 state
 
     componentWillMount() {
-        this.props.getCodeData(config.request.id,this.props.editorType,() => {
+        this.props.getCodeData(config.request.id,() => {
             setTimeout(this.props.getChart,500)
             this.setState({loading:false})
         })
     }//插入 DOM 前
 
     render() {
-        const {setDataSetType, setChartSetTitle, getChart, chartSet, editorType, saveChart} = this.props
+        const {setDataSetType, setChartSetTitle, getChart, chartSet, saveChart} = this.props
         const setChartType = (type) => {
             setDataSetType(type)
             getChart()
@@ -54,8 +53,7 @@ class EditorUI extends Component {
                     <header>
                         <div className="logo"/>
                     </header>
-                    {editorType === 'drag' && <DragContent/>}
-                    {editorType === 'code' && <CodeContent/>}
+                    <CodeContent/>
                     <aside className="right-aside">
                         <div className="chart-set-panel">
                             <Button className="chart-set-save" type="primary" size="large" onClick={() => saveChart(() => message.success('保存成功！'))}>保存</Button>
@@ -73,7 +71,7 @@ class EditorUI extends Component {
                                         <div className="chart-set-select-" onClick={() => setChartType("table")}></div>
                                     </div>
                                 }>
-                                    <Button icon="appstore" type="ghost" size="large">表&nbsp;&nbsp;&nbsp;格</Button>
+                                    <Button icon="appstore" type="ghost" size="small">表&nbsp;&nbsp;&nbsp;格</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-line">
@@ -85,7 +83,7 @@ class EditorUI extends Component {
                                         </div>
                                     </div>
                                 }>
-                                    <Button icon="line-chart" type="ghost" size="large">折线图</Button>
+                                    <Button icon="line-chart" type="ghost" size="small">折线图</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-bar">
@@ -95,7 +93,7 @@ class EditorUI extends Component {
                                              onClick={() => setChartType("bar-y-category")}></div>
                                     </div>
                                 }>
-                                    <Button icon="bar-chart" type="ghost" size="large">柱状图</Button>
+                                    <Button icon="bar-chart" type="ghost" size="small">柱状图</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-pie">
@@ -105,19 +103,19 @@ class EditorUI extends Component {
                                              onClick={() => setChartType("pie-doughnut")}></div>
                                     </div>
                                 }>
-                                    <Button icon="pie-chart" type="ghost" size="large">饼&nbsp;&nbsp;&nbsp;图</Button>
+                                    <Button icon="pie-chart" type="ghost" size="small">饼&nbsp;&nbsp;&nbsp;图</Button>
                                 </Popover>
                                 { false && <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-strip">
                                     </div>
                                 }>
-                                    <Button icon="menu-unfold" type="ghost" size="large">条线图</Button>
+                                    <Button icon="menu-unfold" type="ghost" size="small">条线图</Button>
                                 </Popover>}
                                 { false && <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-filter">
                                     </div>
                                 }>
-                                    <Button icon="filter" type="ghost" size="large">漏斗图</Button>
+                                    <Button icon="filter" type="ghost" size="small">漏斗图</Button>
                                 </Popover>}
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-map">
@@ -125,7 +123,7 @@ class EditorUI extends Component {
                                              onClick={() => setChartType("map-china-dataRange")}></div>
                                     </div>
                                 }>
-                                    <Button icon="environment" type="ghost" size="large">地&nbsp;&nbsp;&nbsp;图</Button>
+                                    <Button icon="environment" type="ghost" size="small">地&nbsp;&nbsp;&nbsp;图</Button>
                                 </Popover>
                             </div>
                             <hr/>

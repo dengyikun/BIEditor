@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {Input, Button, Tag, Tooltip, Modal, Form, Radio, InputNumber, Checkbox} from 'antd'
+import {Input, Button, Tag, Tooltip, Modal, Form, Radio, InputNumber, Checkbox, Icon} from 'antd'
 import EditorChart from './EditorChart.jsx'
 import editorAction from '../actions/editorAction'
 
@@ -156,11 +156,15 @@ class CodeContentUI extends Component {
         }
         return (
             <div className="content-wrapper">
-                <div className="field-panel">
-                    <div className="field-item field-item-title">
-                        <Button icon="upload" type="ghost" size="large">拖拽模式</Button>
-                        <Button icon="code" type="ghost" size="large">代码模式</Button>
+                <div className="content-wrapper-title">
+                    <div size="large">
+                        <Icon type="upload"/> 拖拽模式
                     </div>
+                    <div className="active" size="large">
+                        <Icon type="code"/> 代码模式
+                    </div>
+                </div>
+                <div className="field-panel">
                     <div className="field-item field-item-row">
                         列(维度)&nbsp;&nbsp;
                         {dataSet.dimensions.map((dimension) => {
@@ -205,8 +209,10 @@ class CodeContentUI extends Component {
                                 size="large">刷新</Button>
                     </div>
                 </div>
-                <Input className="data-code-panel" type="textarea" placeholder="代码编辑区"
-                       value={dataSet.sql} onChange={(event) => setDataSetSql(event.target.value)}/>
+                <div className="data-code-panel">
+                    <Input type="textarea" placeholder="代码编辑区"
+                           value={dataSet.sql} onChange={(event) => setDataSetSql(event.target.value)}/>
+                </div>
                 <div className="chart-panel">
                     <EditorChart/>
                 </div>

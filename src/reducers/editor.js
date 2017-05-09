@@ -3,13 +3,13 @@
  */
 
 const initialState = {
-    editorType: 'code',
     dataSet: {
         sourceId: '',    //数据源Id
         type: '',   //图表类型
         sql: '',  //sql语句
         dimensions: [],
-        values: []
+        values: [],
+        model: 2
     },
     chartSet: {
         chartId: "",

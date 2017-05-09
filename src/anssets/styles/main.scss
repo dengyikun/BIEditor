@@ -1,8 +1,8 @@
-$mainColor: #108ee9;
-$gap-lg: 40px;
-$gap-md: 20px;
-$gap-sm: 10px;
-$gap-xs: 5px;
+$mainColor: #528fdf;
+$gap-lg: 32px;
+$gap-md: 16px;
+$gap-sm: 8px;
+$gap-xs: 4px;
 
 @mixin background-set($color: transparent,$position: center,$repeat: no-repeat,$size: cover) {
   background-color: $color;
