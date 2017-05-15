@@ -28,7 +28,7 @@ class CodeContentUI extends Component {
             visibleName: '',
             visibleThousands: true,
             isCodeFilterShow: false,
-            sqlFilter: []
+            codeFilter: []
         }
     }//初始化 state
 
@@ -125,22 +125,33 @@ class CodeContentUI extends Component {
     }
 
     showCodeFilter = () => {
-        let sqlFilter = []
+        let codeFilter = []
         let error = ''
-        this.props.dataSet.sql.replace(/\$\{(.*?)\}/g, function (string, match) {
-            if (sqlFilter.findIndex((item) => item === match) !== -1){
+        this.props.dataSet.sql.replace(/\$\{(.*?)\}/g, (string, match) => {
+            if (codeFilter.findIndex((item) => item.name === match) !== -1) {
                 error = '存在相同的 SQL 数值！'
-                return
+            } else if (match) {
+                const filter = this.props.dataSet.codeFilter.find((item) => item.name === match)
+                if (filter) {
+                    codeFilter.push({
+                        name: match,
+                        value: filter.value,
+                    })
+                } else {
+                    codeFilter.push({
+                        name: match,
+                        value: '',
+                    })
+                }
             }
-            sqlFilter.push(match)
         })
-        if (sqlFilter.length === 0) {
+        if (codeFilter.length === 0) {
             error = '没有设置 SQL 数值！'
         }
         if (error) {
             message.error(error)
-        }else {
-            this.setState({isCodeFilterShow: true, sqlFilter })
+        } else {
+            this.setState({isCodeFilterShow: true, codeFilter})
         }
     }
 
@@ -299,8 +310,8 @@ class CodeContentUI extends Component {
                 <CodeFilterModal
                     visible={this.state.isCodeFilterShow}
                     onCancel={() => this.setState({isCodeFilterShow: false})}
-                    onOk={this.setCodeFilter}
-                    sqlFilter={this.state.sqlFilter}/>
+                    setDataSetCodeFilter={this.props.setDataSetCodeFilter}
+                    codeFilter={this.state.codeFilter}/>
             </div>
         )
     }
@@ -319,7 +330,7 @@ const CodeFilterModal = Form.create()(
     class extends Component {
         static propTypes = {
             visible: PropTypes.bool.isRequired,
-            onOk: PropTypes.func.isRequired,
+            setDataSetCodeFilter: PropTypes.func.isRequired,
             onCancel: PropTypes.func.isRequired,
             codeFilter: PropTypes.array.isRequired
         }//props 类型检查
@@ -333,6 +344,23 @@ const CodeFilterModal = Form.create()(
             this.state = {}
         }//初始化 state
 
+        onOk = () => {
+            this.props.form.validateFields((err, values) => {
+                if (!err) {
+                    debugger
+                    let codeFilter = []
+                    for(const key in values) {
+                        codeFilter.push({
+                            name: key,
+                            value: values[key]
+                        })
+                    }
+                    this.props.setDataSetCodeFilter(codeFilter)
+                    this.props.onCancel()
+                }
+            })
+        }
+
         render() {
             return (
 
@@ -340,9 +368,18 @@ const CodeFilterModal = Form.create()(
                     {...this.props}
                     title="SQL 赋值"
                     afterClose={() => this.props.form.resetFields()}
+                    onOk={this.onOk}
                 >
                     {
-
+                        this.props.codeFilter.map((filter) =>
+                            <FormItem label={filter.name} labelCol={{span:6}} wrapperCol={{span:14}}>
+                                {this.props.form.getFieldDecorator(filter.name, {
+                                    initialValue: filter.value
+                                })(
+                                    <Input/>
+                                )}
+                            </FormItem>
+                        )
                     }
                 </Modal>
             )

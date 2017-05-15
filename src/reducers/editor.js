@@ -38,6 +38,8 @@ export default (state = initialState, action) => {
             return {...state, dataSet: {...state.dataSet, sql: action.payload}}
         case 'SETDATASETTYPE':
             return {...state, dataSet: {...state.dataSet, type: action.payload}}
+        case 'SETDATASETCODEFILTER':
+            return {...state, dataSet: {...state.dataSet, codeFilter: action.payload}}
         case 'SETCHARTSET':
             return {...state, chartSet: action.payload}
         case 'SETCHARTSETTITLE':

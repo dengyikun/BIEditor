@@ -18,6 +18,7 @@ const actions = {
             })
             .then(data => {
                 if (data.code === 200) {
+                    debugger
                     const dataSet = {
                         sourceId: data.data.sourceId,    //数据源Id
                         type: data.data.type,   //图表类型
@@ -28,7 +29,8 @@ const actions = {
                             sort: "降序"
                         }],
                         model: data.data.model || 2,
-                        values: data.data.values || []
+                        values: data.data.values || [],
+                        codeFilter: data.data.codeFilter || [],
                     }
                     dispatch({
                         type: 'SETDATASET',
@@ -295,7 +297,7 @@ const actions = {
             style: JSON.stringify(chartSet.style),
             number: 0,
             model: dataSet.model,
-            filter: '',
+            codeFilter: JSON.stringify(dataSet.codeFilter),
             relevanceTable: '',
             type: dataSet.type,
             sql: dataSet.sql,
@@ -341,6 +343,11 @@ const actions = {
     setDataSetType: (type) => ({
         type: 'SETDATASETTYPE',
         payload: type
+    }),
+
+    setDataSetCodeFilter: (codeFilter) => ({
+        type: 'SETDATASETCODEFILTER',
+        payload: codeFilter
     }),
 
     setChartSetTitle: (name) => ({
