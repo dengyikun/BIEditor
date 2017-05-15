@@ -16,7 +16,11 @@ const initialState = {
         title: "",
         style: ""
     },
-    chart: {}
+    chart: {},
+    source: {
+        sourceName: '',
+        tableList: []
+    }
 }
 export default (state = initialState, action) => {
     switch (action.type) {
@@ -24,6 +28,8 @@ export default (state = initialState, action) => {
             return {...state, chart: action.payload}
         case 'SETDATASET':
             return {...state, dataSet: action.payload}
+        case 'SETSOURCE':
+            return {...state, source: action.payload}
         case 'SETDATASETDIMENSIONS':
             return {...state, dataSet: {...state.dataSet, dimensions: action.payload}}
         case 'SETDATASETVALUES':

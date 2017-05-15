@@ -43,8 +43,7 @@ class Echart extends Component {
     }//接收新 prop
 
     refreshChart = () => {
-        fetch(`${config.dataApiHost}/data/panel/chart/${config.request.token}/
-        ${this.props.item.data.panelId}/${this.props.item.data.chartId}`, {
+        fetch(`${config.dataApiHost}/data/panel/chart/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}`, {
             method: "GET",
             headers: {
                 'Accept': 'application/json',
@@ -58,7 +57,6 @@ class Echart extends Component {
                 return response.json()
             })
             .then(data => {
-                debugger
                 if (data.code === 200) {
                     data.data.style = JSON.parse(data.data.style)
                     const set = data.data
@@ -137,6 +135,12 @@ class Echart extends Component {
                                     columns: columns,
                                     dataSource: dataSource,
                                     title: set.title,
+                                }
+                                break
+                            case "unit-value":
+                                option = {
+                                    ...option,
+                                    ...chart
                                 }
                                 break
                             case "line-stack":
@@ -227,15 +231,8 @@ class Echart extends Component {
                             default:
                                 break
                         }
-                        if (set.type === 'table') {
-                            this.setState({
-                                type: option.type,
-                                columns: option.columns,
-                                dataSource: option.dataSource,
-                                title: option.title
-                            })
-                        } else {
-                            this.setState({type: option.type})
+                        this.setState({...option})
+                        if (set.type !== 'table' && set.type !== 'unit-value') {
                             let echartSample = echarts.init(this.refs.chart, this.props.theme)
                             echartSample.setOption(option)
                             window.addEventListener('resize', echartSample.resize)
@@ -262,6 +259,7 @@ class Echart extends Component {
                         <Icon type="delete" onClick={() => this.props.onRemove(this.props.item.id)}/>
                         {
                             this.state.type !== 'table' &&
+                            this.state.type !== 'unit-value' &&
                             <Icon type="download" onClick={this.downloadIamge}/>
                         }
                         <Icon type="edit"
@@ -272,6 +270,7 @@ class Echart extends Component {
                 <div style={{width: '100%', height: '100%'}} className={this.props.theme}>
                     {
                         this.state.type !== 'table' &&
+                        this.state.type !== 'unit-value' &&
                         <div style={{width: '100%', height: '100%'}} ref="chart">
                         </div>
                     }
@@ -282,6 +281,17 @@ class Echart extends Component {
                                    dataSource={this.state.dataSource} bordered
                                    title={() => <p style={{fontSize: 18}}>{this.state.title}</p>}/>
                         </ReactScrollbar>
+                    }
+                    {
+                        this.state.type === 'unit-value' &&
+                        <div className="unit-value">
+                            <div className="unit-value-name">
+                                {this.state.name || ''}
+                            </div>
+                            <div className="unit-value-value">
+                                {this.state.value || ''}
+                            </div>
+                        </div>
                     }
                 </div>
             </div>

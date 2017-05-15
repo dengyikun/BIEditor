@@ -56,21 +56,30 @@ class EditorChartUI extends Component {
     }//卸载前
 
     render() {
-        const columns = this.props.chart.columns || []
-        const dataSource = this.props.chart.dataSource || []
-        const title = this.props.chart.title || ''
         return (
             <div className="chart-content">
                 {
                     this.props.dataSet.type === 'table' &&
                     <ReactScrollbar>
-                        <Table columns={columns} size="middle"
-                               dataSource={dataSource} bordered
-                               title={() => <p style={{fontSize: 18}}>{title}</p>}/>
+                        <Table columns={this.props.chart.columns || []} size="middle"
+                               dataSource={this.props.chart.dataSource || []} bordered
+                               title={() => <p style={{fontSize: 18}}>{this.props.chart.title || ''}</p>}/>
                     </ReactScrollbar>
                 }
                 {
+                    this.props.dataSet.type === 'unit-value' &&
+                    <div className="unit-value">
+                        <div className="unit-value-name">
+                            {this.props.chart.name || ''}
+                        </div>
+                        <div className="unit-value-value">
+                            {this.props.chart.value || ''}
+                        </div>
+                    </div>
+                }
+                {
                     this.props.dataSet.type !== 'table' &&
+                    this.props.dataSet.type !== 'unit-value' &&
                     <div className="e-chart" ref="echart"></div>
                 }
             </div>

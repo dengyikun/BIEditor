@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
-import {Input, Button, Tag, Tooltip, Modal, Form, Radio, InputNumber, Checkbox, Icon} from 'antd'
+import {Input, Button, Tag, Tooltip, Modal, Form, Radio, InputNumber, Checkbox, Icon, message} from 'antd'
 import EditorChart from './EditorChart.jsx'
 import editorAction from '../actions/editorAction'
 
@@ -15,26 +15,27 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => (bindActionCreators(editorAction, dispatch))
 
 class CodeContentUI extends Component {
-    static propTypes = {
-    }
+    static propTypes = {}
 
     constructor(props) {
         super(props)
         this.state = {
-            refreshLoading: 'reload',
+            refreshLoading: 'swap',
             inputVisible: false,
             inputValue: '',
             visible: false,
             visibleType: '',
             visibleName: '',
             visibleThousands: true,
+            isCodeFilterShow: false,
+            sqlFilter: []
         }
     }//初始化 state
 
     refreshChart = () => {
         this.setState({refreshLoading: 'loading'})
-        this.props.getChart(() => {
-            this.setState({refreshLoading: 'reload'})
+        this.props.getChart(this.props.dataSet, () => {
+            this.setState({refreshLoading: 'swap'})
         })
     }
 
@@ -78,7 +79,7 @@ class CodeContentUI extends Component {
     handleCreate = () => {
         const {visibleType, visibleName} = this.state
         const {form, dataSet} = this.props
-        const {name, comment, layoutType, layoutDecimal, layoutThousands} = form.getFieldsValue(['name', 'comment','layoutType','layoutDecimal','layoutThousands'])
+        const {name, comment, layoutType, layoutDecimal, layoutThousands} = form.getFieldsValue(['name', 'comment', 'layoutType', 'layoutDecimal', 'layoutThousands'])
         form.validateFields((err, values) => {
             if (err) {
                 return;
@@ -121,6 +122,26 @@ class CodeContentUI extends Component {
             callback('维度的数据库字段名称已存在！')
         }
         callback()
+    }
+
+    showCodeFilter = () => {
+        let sqlFilter = []
+        let error = ''
+        this.props.dataSet.sql.replace(/\$\{(.*?)\}/g, function (string, match) {
+            if (sqlFilter.findIndex((item) => item === match) !== -1){
+                error = '存在相同的 SQL 数值！'
+                return
+            }
+            sqlFilter.push(match)
+        })
+        if (sqlFilter.length === 0) {
+            error = '没有设置 SQL 数值！'
+        }
+        if (error) {
+            message.error(error)
+        }else {
+            this.setState({isCodeFilterShow: true, sqlFilter })
+        }
     }
 
     render() {
@@ -184,7 +205,8 @@ class CodeContentUI extends Component {
                             const comment = value.comment
                             const isLongTag = name.length * 2 + comment.length > 18
                             const tagElem = (
-                                <Tag key={name} onClick={() => this.showModal('values', name,value.layout.type )} closable={index !== -1}
+                                <Tag key={name} onClick={() => this.showModal('values', name, value.layout.type)}
+                                     closable={index !== -1}
                                      onClose={(e) => e.stopPropagation()} afterClose={() => this.valuesClose(name)}>
                                     {isLongTag ? `${(name + '[' + comment + ']').slice(0, 20)}...` : (name + '[' + comment + ']')}
                                 </Tag>
@@ -205,13 +227,15 @@ class CodeContentUI extends Component {
                         {!inputVisible &&
                         <Button type="dashed" icon="plus" shape="circle"
                                 onClick={() => this.setState({inputVisible: true}, () => this.input.focus())}/>}
-                        <Button className="refresh-chart" type="primary" icon={this.state.refreshLoading} onClick={this.refreshChart}
-                                size="large">刷新</Button>
                     </div>
                 </div>
                 <div className="data-code-panel">
                     <Input type="textarea" placeholder="代码编辑区"
                            value={dataSet.sql} onChange={(event) => setDataSetSql(event.target.value)}/>
+                    <Button className="edit-sql-value" icon="edit"
+                            onClick={this.showCodeFilter}>赋值</Button>
+                    <Button className="refresh-chart" icon={this.state.refreshLoading}
+                            onClick={this.refreshChart}>刷新</Button>
                 </div>
                 <div className="chart-panel">
                     <EditorChart/>
@@ -247,7 +271,7 @@ class CodeContentUI extends Component {
                             {getFieldDecorator('layoutType', {
                                 initialValue: modelLayoutType
                             })(
-                                <Radio.Group onChange={(e) => this.setState({visibleThousands:e.target.value === 1})}>
+                                <Radio.Group onChange={(e) => this.setState({visibleThousands: e.target.value === 1})}>
                                     <Radio value={1}>数值</Radio>
                                     <Radio value={0}>百分数</Radio>
                                 </Radio.Group>
@@ -263,7 +287,7 @@ class CodeContentUI extends Component {
                         </FormItem>}
                         {visibleType === 'values' && this.state.visibleThousands &&
                         <FormItem label="分隔符">
-                            {getFieldDecorator('layoutThousands',{
+                            {getFieldDecorator('layoutThousands', {
                                 valuePropName: 'checked',
                                 initialValue: modelLayoutThousands
                             })(
@@ -272,6 +296,11 @@ class CodeContentUI extends Component {
                         </FormItem>}
                     </Form>
                 </Modal>
+                <CodeFilterModal
+                    visible={this.state.isCodeFilterShow}
+                    onCancel={() => this.setState({isCodeFilterShow: false})}
+                    onOk={this.setCodeFilter}
+                    sqlFilter={this.state.sqlFilter}/>
             </div>
         )
     }
@@ -286,6 +315,40 @@ class CodeContentUI extends Component {
     componentDidUpdate() {
     }
 }
+const CodeFilterModal = Form.create()(
+    class extends Component {
+        static propTypes = {
+            visible: PropTypes.bool.isRequired,
+            onOk: PropTypes.func.isRequired,
+            onCancel: PropTypes.func.isRequired,
+            codeFilter: PropTypes.array.isRequired
+        }//props 类型检查
+
+        static defaultProps = {}//默认 props
+
+        static contextTypes = {}//context 显式注册
+
+        constructor(props) {
+            super(props)
+            this.state = {}
+        }//初始化 state
+
+        render() {
+            return (
+
+                <Modal
+                    {...this.props}
+                    title="SQL 赋值"
+                    afterClose={() => this.props.form.resetFields()}
+                >
+                    {
+
+                    }
+                </Modal>
+            )
+        }//渲染
+    }
+)
 
 const CodeContent = connect(
     mapStateToProps,

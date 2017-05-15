@@ -19,9 +19,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => (bindActionCreators(editorAction, dispatch))
 
 class ChartStyleUI extends Component {
-    static propTypes = {
-        refresh: PropTypes.func.isRequired
-    }//props 类型检查
+    static propTypes = {}//props 类型检查
 
     static defaultProps = {}//默认 props
 
@@ -70,8 +68,7 @@ class ChartStyleUI extends Component {
         return (
             <Form className="chart-set-style">
                 <div style={{fontSize: 16, marginBottom: 8}}>
-                    <Icon type="setting"/>
-                    {' 图表标题'}
+                    图表设置
                 </div>
                 {
                     setItems.includes('showX') &&

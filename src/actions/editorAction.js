@@ -18,9 +18,6 @@ const actions = {
             })
             .then(data => {
                 if (data.code === 200) {
-                    if (callback) {
-                        callback()
-                    }
                     const dataSet = {
                         sourceId: data.data.sourceId,    //数据源Id
                         type: data.data.type,   //图表类型
@@ -51,33 +48,20 @@ const actions = {
                         type: 'SETCHARTSET',
                         payload: chartSet
                     })
+                    if (callback) {
+                        callback(data.data.sourceId, dataSet)
+                    }
                 }
             })
     },
 
-    saveChart: (callback) => (dispatch, getState) => {
-        const dataSet = getState().dataSet
-        const chartSet = getState().chartSet
-        const data = {
-            chartId: chartSet.chartId,
-            title: chartSet.title,
-            style: JSON.stringify(chartSet.style),
-            number: 0,
-            model: dataSet.model,
-            filter: '',
-            relevanceTable: '',
-            type: dataSet.type,
-            sql: dataSet.sql,
-            dimensions: dataSet.dimensions,
-            values: dataSet.values
-        }
-        fetch(`${config.mgmtApiHost}/chart/update/${config.request.token}`, {
-            method: "POST",
+    getSourceTable: (sourceId, parameter) => (dispatch, getState) => {
+        fetch(`${config.mgmtApiHost}/source/sourceTable/0/${sourceId}/0/-1?parameter=${parameter || ''}`, {
+            method: "GET",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
+            }
         })
             .then(response => {
                 if (response.status >= 400) {
@@ -86,23 +70,24 @@ const actions = {
                 return response.json()
             })
             .then(data => {
-                if (data.code === 200 && callback) {
-                    callback()
+                if (data.code === 200) {
+                    dispatch({
+                        type: 'SETSOURCE',
+                        payload: data.data
+                    })
                 }
             })
     },
 
-    getChart: (callback) => (dispatch, getState) => {
-        const data = getState().dataSet
-
-
+    getChart: (dataSet, callback) => (dispatch, getState) => {
+        dataSet = getState().dataSet
         fetch(`${config.dataApiHost}/data/all/${config.request.token}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(dataSet)
         })
             .then(response => {
                 if (callback) {
@@ -115,6 +100,9 @@ const actions = {
             })
             .then(data => {
                 if (data.code === 200 && data.data) {
+                    if (callback) {
+                        callback()
+                    }
                     const set = {
                         type: getState().dataSet.type,
                         title: getState().chartSet.title,
@@ -194,6 +182,12 @@ const actions = {
                                 columns: columns,
                                 dataSource: dataSource,
                                 title: set.title,
+                            }
+                            break
+                        case "unit-value":
+                            option = {
+                                ...option,
+                                ...chart
                             }
                             break
                         case "line-stack":
@@ -288,6 +282,43 @@ const actions = {
                         type: 'SETCHART',
                         payload: option
                     })
+                }
+            })
+    },
+
+    saveChart: (callback) => (dispatch, getState) => {
+        const dataSet = getState().dataSet
+        const chartSet = getState().chartSet
+        const data = {
+            chartId: chartSet.chartId,
+            title: chartSet.title,
+            style: JSON.stringify(chartSet.style),
+            number: 0,
+            model: dataSet.model,
+            filter: '',
+            relevanceTable: '',
+            type: dataSet.type,
+            sql: dataSet.sql,
+            dimensions: dataSet.dimensions,
+            values: dataSet.values
+        }
+        fetch(`${config.mgmtApiHost}/chart/update/${config.request.token}`, {
+            method: "POST",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.status >= 400) {
+                    throw new Error("Bad response from server")
+                }
+                return response.json()
+            })
+            .then(data => {
+                if (data.code === 200 && callback) {
+                    callback()
                 }
             })
     },
