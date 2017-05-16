@@ -6,7 +6,7 @@ const initialState = {
     dataSet: {
         sourceId: '',    //数据源Id
         type: '',   //图表类型
-        sql: '',  //sql语句
+        codeSql: '',  //sql语句
         dimensions: [],
         values: [],
         model: 2
@@ -35,7 +35,7 @@ export default (state = initialState, action) => {
         case 'SETDATASETVALUES':
             return {...state, dataSet: {...state.dataSet, values: action.payload}}
         case 'SETDATASETSQL':
-            return {...state, dataSet: {...state.dataSet, sql: action.payload}}
+            return {...state, dataSet: {...state.dataSet, codeSql: action.payload}}
         case 'SETDATASETTYPE':
             return {...state, dataSet: {...state.dataSet, type: action.payload}}
         case 'SETDATASETCODEFILTER':

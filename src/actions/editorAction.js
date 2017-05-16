@@ -18,11 +18,10 @@ const actions = {
             })
             .then(data => {
                 if (data.code === 200) {
-                    debugger
                     const dataSet = {
                         sourceId: data.data.sourceId,    //数据源Id
                         type: data.data.type,   //图表类型
-                        sql: data.data.sql || '',  //sql语句
+                        codeSql: data.data.codeSql || '',  //sql语句
                         dimensions: data.data.dimensions || [{
                             comment: "空",
                             name: "null",
@@ -30,7 +29,8 @@ const actions = {
                         }],
                         model: data.data.model || 2,
                         values: data.data.values || [],
-                        codeFilter: data.data.codeFilter || [],
+                        codeFilter: data.data.codeFilter ? JSON.parse(data.data.codeFilter ) : [],
+                        dragFilter: data.data.dragFilter ? JSON.parse(data.data.dragFilter ) : [],
                     }
                     dispatch({
                         type: 'SETDATASET',
@@ -82,14 +82,18 @@ const actions = {
     },
 
     getChart: (dataSet, callback) => (dispatch, getState) => {
-        dataSet = getState().dataSet
+        let data = {...dataSet}
+        data.codeFilter = JSON.stringify(data.codeFilter)
+        data.dragFilter = JSON.stringify(data.dragFilter)
+        data.filter = data.model === 1 ? data.dragFilter : data.codeFilter
+        data.sql = data.model === 1 ? data.dragSql : data.codeSql,
         fetch(`${config.dataApiHost}/data/all/${config.request.token}`, {
             method: "POST",
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataSet)
+            body: JSON.stringify(data)
         })
             .then(response => {
                 if (callback) {
@@ -297,10 +301,12 @@ const actions = {
             style: JSON.stringify(chartSet.style),
             number: 0,
             model: dataSet.model,
-            codeFilter: JSON.stringify(dataSet.codeFilter),
+            filter: dataSet.model === 1 ? JSON.stringify(dataSet.dragFilter)
+                : JSON.stringify(dataSet.codeFilter),
             relevanceTable: '',
             type: dataSet.type,
-            sql: dataSet.sql,
+            codeSql: dataSet.codeSql,
+            sql: dataSet.model === 1 ? dataSet.dragSql : dataSet.codeSql,
             dimensions: dataSet.dimensions,
             values: dataSet.values
         }
@@ -335,9 +341,9 @@ const actions = {
         payload: values
     }),
 
-    setDataSetSql: (sql) => ({
+    setDataSetCodeSql: (codeSql) => ({
         type: 'SETDATASETSQL',
-        payload: sql
+        payload: codeSql
     }),
 
     setDataSetType: (type) => ({

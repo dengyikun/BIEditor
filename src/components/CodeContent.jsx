@@ -127,7 +127,7 @@ class CodeContentUI extends Component {
     showCodeFilter = () => {
         let codeFilter = []
         let error = ''
-        this.props.dataSet.sql.replace(/\$\{(.*?)\}/g, (string, match) => {
+        this.props.dataSet.codeSql.replace(/\$\{(.*?)\}/g, (string, match) => {
             if (codeFilter.findIndex((item) => item.name === match) !== -1) {
                 error = '存在相同的 SQL 数值！'
             } else if (match) {
@@ -156,7 +156,7 @@ class CodeContentUI extends Component {
     }
 
     render() {
-        const {dataSet, setDataSetSql, form} = this.props
+        const {dataSet, setDataSetCodeSql, form} = this.props
         const {inputVisible, inputValue, visibleType, visibleName} = this.state
         const {getFieldDecorator} = form
         let modelName = ''
@@ -242,7 +242,7 @@ class CodeContentUI extends Component {
                 </div>
                 <div className="data-code-panel">
                     <Input type="textarea" placeholder="代码编辑区"
-                           value={dataSet.sql} onChange={(event) => setDataSetSql(event.target.value)}/>
+                           value={dataSet.codeSql} onChange={(event) => setDataSetCodeSql(event.target.value)}/>
                     <Button className="edit-sql-value" icon="edit"
                             onClick={this.showCodeFilter}>赋值</Button>
                     <Button className="refresh-chart" icon={this.state.refreshLoading}
@@ -349,7 +349,7 @@ const CodeFilterModal = Form.create()(
                 if (!err) {
                     debugger
                     let codeFilter = []
-                    for(const key in values) {
+                    for (const key in values) {
                         codeFilter.push({
                             name: key,
                             value: values[key]
@@ -370,17 +370,20 @@ const CodeFilterModal = Form.create()(
                     afterClose={() => this.props.form.resetFields()}
                     onOk={this.onOk}
                 >
-                    {
-                        this.props.codeFilter.map((filter) =>
-                            <FormItem label={filter.name} labelCol={{span:6}} wrapperCol={{span:14}}>
-                                {this.props.form.getFieldDecorator(filter.name, {
-                                    initialValue: filter.value
-                                })(
-                                    <Input/>
-                                )}
-                            </FormItem>
-                        )
-                    }
+                    <Form>
+                        {
+                            this.props.codeFilter.map((filter) =>
+                                <FormItem label={filter.name} labelCol={{span: 6}} wrapperCol={{span: 14}}
+                                          key={filter.name}>
+                                    {this.props.form.getFieldDecorator(filter.name, {
+                                        initialValue: filter.value
+                                    })(
+                                        <Input/>
+                                    )}
+                                </FormItem>
+                            )
+                        }
+                    </Form>
                 </Modal>
             )
         }//渲染

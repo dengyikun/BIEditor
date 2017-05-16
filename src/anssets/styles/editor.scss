@@ -60,6 +60,7 @@ html, body {
       left: 0;
       z-index: $rightAsideIndex;
       padding: $gap-md + 50px $gap-md $gap-md $gap-md;
+      border-right: 1px solid #c3cacf;
 
       div {
         font-size: 16px;
