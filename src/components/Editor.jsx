@@ -50,13 +50,15 @@ class EditorUI extends Component {
     onSearch = (value) => {
         this.props.getSourceTable(this.props.dataSet.sourceId, value)
     }
+    setChartType = (type) => {
+        let dataSet = {...this.props.dataSet}
+        dataSet.type = type
+        this.props.setDataSetType(type)
+        this.props.getChart(dataSet)
+    }
 
     render() {
-        const {setDataSetType, setChartSetTitle, getChart, chartSet, saveChart} = this.props
-        const setChartType = (type) => {
-            setDataSetType(type)
-            getChart()
-        }
+        const {setChartSetTitle, chartSet, saveChart} = this.props
         return (
             <Spin spinning={this.state.loading}>
                 <div className='wrapper'>
@@ -74,7 +76,7 @@ class EditorUI extends Component {
                                 this.props.source.tableList.map((item) => {
                                     const columns = []
                                     item.columns.map((column) => {
-                                        columns.push(<TreeNode title={'列：' + column.name} key={column.name} />)
+                                        columns.push(<TreeNode title={'列：' + column.name} key={column.name}/>)
                                     })
                                     return <TreeNode title={'表：' + item.tableName} key={item.tableName}>
                                         {columns}
@@ -86,7 +88,7 @@ class EditorUI extends Component {
                     <CodeContent/>
                     <aside className="right-aside">
                         <div className="chart-set-panel">
-                            <Button className="chart-set-save" type="primary" size="large"
+                            <Button className="chart-set-save" type="primary" size="large" icon="save"
                                     onClick={() => saveChart(() => message.success('保存成功！'))}>保存</Button>
                             <hr/>
                             <div className="chart-set-title-label">
@@ -101,7 +103,7 @@ class EditorUI extends Component {
                                 图表类型
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-table">
-                                        <div className="chart-set-select-" onClick={() => setChartType("table")}></div>
+                                        <div className="chart-set-select-" onClick={() => this.setChartType("table")}></div>
                                     </div>
                                 }>
                                     <Button icon="appstore" type="ghost" size="small">表&nbsp;&nbsp;&nbsp;格</Button>
@@ -109,10 +111,10 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-line">
                                         <div className="chart-set-select-line-stack"
-                                             onClick={() => setChartType("line-stack")}>
+                                             onClick={() => this.setChartType("line-stack")}>
                                         </div>
                                         <div className="chart-set-select-area-stack"
-                                             onClick={() => setChartType("area-stack")}>
+                                             onClick={() => this.setChartType("area-stack")}>
                                         </div>
                                     </div>
                                 }>
@@ -121,9 +123,9 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-bar">
                                         <div className="chart-set-select-bar-tick-align"
-                                             onClick={() => setChartType("bar-tick-align")}></div>
+                                             onClick={() => this.setChartType("bar-tick-align")}></div>
                                         <div className="chart-set-select-bar-y-category"
-                                             onClick={() => setChartType("bar-y-category")}></div>
+                                             onClick={() => this.setChartType("bar-y-category")}></div>
                                     </div>
                                 }>
                                     <Button icon="bar-chart" type="ghost" size="small">柱状图</Button>
@@ -131,9 +133,9 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-pie">
                                         <div className="chart-set-select-pie-simple"
-                                             onClick={() => setChartType("pie-simple")}></div>
+                                             onClick={() => this.setChartType("pie-simple")}></div>
                                         <div className="chart-set-select-pie-doughnut"
-                                             onClick={() => setChartType("pie-doughnut")}></div>
+                                             onClick={() => this.setChartType("pie-doughnut")}></div>
                                     </div>
                                 }>
                                     <Button icon="pie-chart" type="ghost" size="small">饼&nbsp;&nbsp;&nbsp;图</Button>
@@ -153,7 +155,7 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-map">
                                         <div className="chart-set-select-map-china-dataRange"
-                                             onClick={() => setChartType("map-china-dataRange")}></div>
+                                             onClick={() => this.setChartType("map-china-dataRange")}></div>
                                     </div>
                                 }>
                                     <Button icon="environment" type="ghost" size="small">地&nbsp;&nbsp;&nbsp;图</Button>
@@ -161,7 +163,7 @@ class EditorUI extends Component {
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-value">
                                         <div className="chart-set-select-unit-value"
-                                             onClick={() => setChartType("unit-value")}></div>
+                                             onClick={() => this.setChartType("unit-value")}></div>
                                     </div>
                                 }>
                                     <Button icon="info" type="ghost" size="small">单&nbsp;&nbsp;&nbsp;值</Button>

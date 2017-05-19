@@ -73,14 +73,16 @@ class ChartStyleUI extends Component {
                 {
                     setItems.includes('showX') &&
                     <FormItem label="横坐标">
-                        <Switch checked={this.props.chartSet.style.showX}
+                        <Switch checked={this.props.chartSet.style.showX} size="small"
+                                style={{marginBottom: 8}}
                                 onChange={(value) => this.changeStyle({showX:value})}/>
                     </FormItem>
                 }
                 {
                     setItems.includes('showY') &&
                     <FormItem label="纵坐标">
-                        <Switch checked={this.props.chartSet.style.showY}
+                        <Switch checked={this.props.chartSet.style.showY} size="small"
+                                style={{marginBottom: 8}}
                                 onChange={(value) => this.changeStyle({showY:value})}/>
                     </FormItem>
                 }

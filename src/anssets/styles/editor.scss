@@ -255,6 +255,8 @@ html, body {
 
         .chart-set-save {
           margin: $gap-sm $gap-md;
+          background: transparent;
+          color: #5290de;
         }
 
         .chart-set-title-label {
@@ -280,7 +282,7 @@ html, body {
             margin: 0 auto;
             display: block;
             color: $mainColor;
-            border: none;
+            border-color: transparent;
             @include border-radius(5px);
 
             &:hover {
@@ -373,5 +375,19 @@ body .chart-set-select-item {
   &.chart-set-select-value {
     .chart-set-select-unit-value {
     }
+  }
+}
+
+body .sql-value-modal {
+  .ant-form-item-label {
+    border-bottom: 1px solid #c3cacf;
+    text-align: center!important;
+  }
+
+  .ant-input {
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid #c3cacf;
+    text-align: center;
   }
 }

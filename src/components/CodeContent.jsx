@@ -369,12 +369,13 @@ const CodeFilterModal = Form.create()(
                     title="SQL 赋值"
                     afterClose={() => this.props.form.resetFields()}
                     onOk={this.onOk}
+                    className="sql-value-modal"
                 >
                     <Form>
                         {
                             this.props.codeFilter.map((filter) =>
-                                <FormItem label={filter.name} labelCol={{span: 6}} wrapperCol={{span: 14}}
-                                          key={filter.name}>
+                                <FormItem label={filter.name} labelCol={{span: 5, offset: 2}} wrapperCol={{span: 13, offset: 2}}
+                                          key={filter.name} colon={false}>
                                     {this.props.form.getFieldDecorator(filter.name, {
                                         initialValue: filter.value
                                     })(
