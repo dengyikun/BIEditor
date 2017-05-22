@@ -4,6 +4,10 @@ import {bindActionCreators} from 'redux'
 import {Input, Button, Tag, Tooltip, Modal, Form, Radio, InputNumber, Checkbox, Icon, message} from 'antd'
 import EditorChart from './EditorChart.jsx'
 import editorAction from '../actions/editorAction'
+import AceEditor from 'react-ace'
+import 'brace/ext/language_tools'
+import 'brace/mode/mysql'
+import 'brace/theme/tomorrow'
 
 const FormItem = Form.Item;
 
@@ -20,6 +24,8 @@ class CodeContentUI extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            init: false,
+            enableLiveAutocompletion: false,
             refreshLoading: 'swap',
             inputVisible: false,
             inputValue: '',
@@ -31,6 +37,12 @@ class CodeContentUI extends Component {
             codeFilter: []
         }
     }//初始化 state
+
+    componentWillReceiveProps(nextProps) {
+        if (!this.state.init) {
+            this.setState({init: true})
+        }
+    }//接收新 props
 
     refreshChart = () => {
         this.setState({refreshLoading: 'loading'})
@@ -186,6 +198,7 @@ class CodeContentUI extends Component {
                     return false
             })
         }
+        console.log(this.state.init)
         return (
             <div className="content-wrapper">
                 <div className="content-wrapper-title">
@@ -241,8 +254,9 @@ class CodeContentUI extends Component {
                     </div>
                 </div>
                 <div className="data-code-panel">
-                    <Input type="textarea" placeholder="代码编辑区"
-                           value={dataSet.codeSql} onChange={(event) => setDataSetCodeSql(event.target.value)}/>
+                    <AceEditor width="100%" height="140px" mode="mysql" theme="tomorrow"
+                               onChange={setDataSetCodeSql} value={dataSet.codeSql}
+                               enableLiveAutocompletion={this.state.init}/>
                     <Button className="edit-sql-value" icon="edit"
                             onClick={this.showCodeFilter}>赋值</Button>
                     <Button className="refresh-chart" icon={this.state.refreshLoading}
@@ -374,7 +388,8 @@ const CodeFilterModal = Form.create()(
                     <Form>
                         {
                             this.props.codeFilter.map((filter) =>
-                                <FormItem label={filter.name} labelCol={{span: 5, offset: 2}} wrapperCol={{span: 13, offset: 2}}
+                                <FormItem label={filter.name} labelCol={{span: 5, offset: 2}}
+                                          wrapperCol={{span: 13, offset: 2}}
                                           key={filter.name} colon={false}>
                                     {this.props.form.getFieldDecorator(filter.name, {
                                         initialValue: filter.value

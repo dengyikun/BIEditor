@@ -10,7 +10,10 @@
   },
   "author": "dengyikun",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "brace": "^0.10.0",
+    "react-ace": "^4.3.0"
+  },
   "devDependencies": {
     "antd": "^2.7.2",
     "babel-core": "^6.21.0",
