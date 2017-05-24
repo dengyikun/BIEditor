@@ -26,34 +26,59 @@ html, body {
 
           .react-grid-item {
 
-            .unit-value {
-              width: 100%;
-              height: 100%;
-              position: relative;
-
-              div {
-                width: 100%;
-                line-height: 100%;
-                text-align: center;
-                @include single
-              }
-
-              .unit-value-name {
-                font-size: 30px;
-                top: 50%;
-                margin-top: -1.5em;
-                position: absolute;
-              }
-
-              .unit-value-value {
-                font-size: 26px;
-                top: 50%;
-                position: absolute;
-              }
-            }
-
             &:not(.react-grid-placeholder) {
               z-index: 1;
+
+              .toolbar {
+                position: absolute;
+                width: auto;
+                height: 30px;
+                right: 0;
+                padding: 6px 10px;
+                font-size: 18px;
+                display: none;
+                color: #777777;
+                z-index: 1;
+
+                i {
+                  cursor: pointer;
+                  float: right;
+                  margin-left: 10px;
+                }
+              }
+
+              .unit-value {
+                width: 100%;
+                height: 100%;
+                position: relative;
+
+                div {
+                  width: 100%;
+                  line-height: 100%;
+                  text-align: center;
+                  @include single
+                }
+
+                .unit-value-name {
+                  font-size: 30px;
+                  top: 50%;
+                  margin-top: -1.5em;
+                  position: absolute;
+                }
+
+                .unit-value-value {
+                  font-size: 26px;
+                  top: 50%;
+                  position: absolute;
+                }
+              }
+
+              &:hover {
+
+                .toolbar {
+                  display: inline-block;
+                }
+              }
             }
           }
         }

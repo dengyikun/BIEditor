@@ -103,7 +103,7 @@ class EditorUI extends Component {
                                 图表类型
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-table">
-                                        <div className="chart-set-select-" onClick={() => this.setChartType("table")}></div>
+                                        <div className="chart-set-select-table" onClick={() => this.setChartType("table")}></div>
                                     </div>
                                 }>
                                     <Button icon="appstore" type="ghost" size="small">表&nbsp;&nbsp;&nbsp;格</Button>

@@ -327,36 +327,44 @@ body .chart-set-select-item {
 
   &.chart-set-select-table {
     .chart-set-select-table {
+      background: url("../images/echart-sample-table.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
   &.chart-set-select-line {
     .chart-set-select-line-stack {
-      background-image: url("../images/line-stack.png");
+      background: url("../images/echart-sample-line-stack.png") no-repeat;
+      background-size: 100% 100%;
     }
 
     .chart-set-select-area-stack {
-      background-image: url("../images/area-stack.png");
+      background: url("../images/echart-sample-area-stack.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
   &.chart-set-select-bar {
     .chart-set-select-bar-tick-align {
-      background-image: url("../images/bar-tick-align.png");
+      background: url("../images/echart-sample-bar-tick-align.png") no-repeat;
+      background-size: 100% 100%;
     }
 
     .chart-set-select-bar-y-category {
-      background-image: url("../images/bar-y-category.png");
+      background: url("../images/echart-sample-bar-y-category.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
   &.chart-set-select-pie {
     .chart-set-select-pie-simple {
-      background-image: url("../images/pie-simple.png");
+      background: url("../images/echart-sample-pie-simple.png") no-repeat;
+      background-size: 100% 100%;
     }
 
     .chart-set-select-pie-doughnut {
-      background-image: url("../images/pie-doughnut.png");
+      background: url("../images/echart-sample-pie-doughnut.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
@@ -368,12 +376,15 @@ body .chart-set-select-item {
 
   &.chart-set-select-map {
     .chart-set-select-map-china-dataRange {
-      background-image: url("../images/map-china-dataRange.png");
+      background: url("../images/echart-sample-map-china-dataRange.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 
   &.chart-set-select-value {
     .chart-set-select-unit-value {
+      background: url("../images/echart-sample-unit-value.png") no-repeat;
+      background-size: 100% 100%;
     }
   }
 }

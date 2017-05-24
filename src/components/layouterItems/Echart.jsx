@@ -2,7 +2,7 @@
  * Created by DengYiKun on 2017/2/11.
  */
 import React, {Component, PropTypes} from 'react'
-import {Table, Icon} from 'antd'
+import {Table, Icon, Menu, Dropdown} from 'antd'
 import ReactScrollbar from 'react-custom-scrollbars'
 import echarts from 'echarts'
 import 'echarts/map/js/china'
@@ -242,31 +242,69 @@ class Echart extends Component {
             })
     }
 
-    downloadIamge = () => {
-        let e = echarts.getInstanceByDom(this.refs.chart)
+    viewData = () => {
+        let echart = echarts.getInstanceByDom(this.refs.chart)
         let a = document.createElement("a")
-        a.href = e.getDataURL()
-        a.download = (e.getOption()).title["0"].text + '.png'
+        a.href = `${config.dataApiHost}/data/table/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}`
+        // a.download = (echart.getOption()).title["0"].text + '.json'
+        a.click()
+    }
+
+    downloadIamge = () => {
+        let echart = echarts.getInstanceByDom(this.refs.chart)
+        let a = document.createElement("a")
+        a.href = echart.getDataURL()
+        a.download = (echart.getOption()).title["0"].text + '.png'
+        a.click()
+    }
+
+    exportExcel = () => {
+        let echart = echarts.getInstanceByDom(this.refs.chart)
+        let a = document.createElement("a")
+        a.href = `${config.dataApiHost}/data/export/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}?sheetTitle=${(echart.getOption()).title["0"].text}`
         a.click()
     }
 
     render() {
         return (
             <div style={{width: '100%', height: '100%'}}>
-                {
-                    this.props.edit &&
-                    <div className="toolbar">
+                <div className="toolbar">
+                    <Dropdown overlay={
+                        <Menu selectedKeys={[]}>
+                            <Menu.Item key="0">
+                                <div onClick={this.viewData}>
+                                    <Icon type="search"/> 查看数据
+                                </div>
+                            </Menu.Item>
+                            {
+                                this.state.type !== 'table' &&
+                                this.state.type !== 'unit-value' &&
+                                <Menu.Item key="1">
+                                    <div onClick={this.downloadIamge}>
+                                        <Icon type="download"/> 下载图片
+                                    </div>
+                                </Menu.Item>
+                            }
+                            <Menu.Item key="2">
+                                <div onClick={this.exportExcel}>
+                                    <Icon type="export"/> 导出图表
+                                </div>
+                            </Menu.Item>
+                        </Menu>
+                    } placement={'bottomRight'}>
+                        <Icon type="down" />
+                    </Dropdown>
+                    {
+                        this.props.edit &&
                         <Icon type="delete" onClick={() => this.props.onRemove(this.props.item.id)}/>
-                        {
-                            this.state.type !== 'table' &&
-                            this.state.type !== 'unit-value' &&
-                            <Icon type="download" onClick={this.downloadIamge}/>
-                        }
+                    }
+                    {
+                        this.props.edit &&
                         <Icon type="edit"
                               onClick={() => window.open('/editor.html?id=' + this.props.item.data.chartId, '_blank')}/>
-                        <Icon type="sync" onClick={this.refreshChart}/>
-                    </div>
-                }
+                    }
+                    <Icon type="sync" onClick={this.refreshChart}/>
+                </div>
                 <div style={{width: '100%', height: '100%'}} className={this.props.theme}>
                     {
                         this.state.type !== 'table' &&
