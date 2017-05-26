@@ -66,7 +66,6 @@ class Player extends Component {
                 onChange: this.onItemChange,
                 onRemove: this.removeItem
             }
-            debugger
             switch (contentItem.type) {
                 case 'chart':
                     content = (

@@ -2,7 +2,7 @@
  * Created by DengYiKun on 2017/2/11.
  */
 import React, {Component, PropTypes} from 'react'
-import {Table, Icon, Menu, Dropdown} from 'antd'
+import {Table, Icon, Menu, Dropdown, Modal} from 'antd'
 import ReactScrollbar from 'react-custom-scrollbars'
 import echarts from 'echarts'
 import 'echarts/map/js/china'
@@ -28,7 +28,10 @@ class Echart extends Component {
             type: 'chart',
             title: '',
             columns: [],
-            dataSource: []
+            dataSource: [],
+            isDataShow: false,
+            isDataLoading: false,
+            data: {}
         }
     }//初始化 state
 
@@ -243,31 +246,62 @@ class Echart extends Component {
     }
 
     viewData = () => {
-        let echart = echarts.getInstanceByDom(this.refs.chart)
-        let a = document.createElement("a")
-        a.href = `${config.dataApiHost}/data/table/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}`
-        // a.download = (echart.getOption()).title["0"].text + '.json'
-        a.click()
+        this.setState({isDataShow: true, isDataLoading: true})
+        fetch(`${config.dataApiHost}/data/table/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}`, {
+            method: "GET",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.status >= 400) {
+                    throw new Error("Bad response from server")
+                }
+                return response.json()
+            })
+            .then(data => {
+                if (data.code === 200) {
+                    this.setState({data: data.data, isDataLoading: false})
+                }
+            })
     }
 
     downloadIamge = () => {
         let echart = echarts.getInstanceByDom(this.refs.chart)
         let a = document.createElement("a")
         a.href = echart.getDataURL()
-        a.download = (echart.getOption()).title["0"].text + '.png'
+        a.download = this.state.title.text + '.png'
         a.click()
     }
 
     exportExcel = () => {
-        let echart = echarts.getInstanceByDom(this.refs.chart)
         let a = document.createElement("a")
-        a.href = `${config.dataApiHost}/data/export/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}?sheetTitle=${(echart.getOption()).title["0"].text}`
+        a.href = `${config.dataApiHost}/data/export/${config.request.token}/${this.props.item.data.panelId}/${this.props.item.data.chartId}?sheetTitle=${this.state.title.text}`
         a.click()
     }
 
     render() {
+        let columns = []
+        if (this.state.data.titles) {
+            this.state.data.titles.map((title, index) => columns.push({
+                title: '姓名',
+                key: index,
+                render: (text, record) => record[index]
+            }))
+        }
         return (
             <div style={{width: '100%', height: '100%'}}>
+                <Modal visible={this.state.isDataShow} title={'查看数据'}
+                       onCancel={() => this.setState({isDataShow: false})}
+                       footer={null}>
+                    <ReactScrollbar style={{height: 440}} autoHide>
+                        <Table columns={columns} size="middle"
+                               dataSource={this.state.data.rows} bordered
+                               pagination={false} loading={this.state.isDataLoading}
+                               style={{textAlign: 'right'}}/>
+                    </ReactScrollbar>
+                </Modal>
                 <div className="toolbar">
                     <Dropdown overlay={
                         <Menu selectedKeys={[]}>
@@ -292,7 +326,7 @@ class Echart extends Component {
                             </Menu.Item>
                         </Menu>
                     } placement={'bottomRight'}>
-                        <Icon type="down" />
+                        <Icon type="down"/>
                     </Dropdown>
                     {
                         this.props.edit &&
