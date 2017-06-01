@@ -274,7 +274,7 @@ class LayouterUI extends Component {
                                                 let icon = "appstore"
                                                 switch (chart.type) {
                                                     case "table":
-                                                        icon = "appstore"
+                                                        icon = "bars"
                                                         break
                                                     case "line-stack":
                                                         icon = "line-chart"
@@ -324,9 +324,9 @@ class LayouterUI extends Component {
                                          BackgroundColor={this.props.background.color}
                                 />
                                 <Icon type="filter" onClick={this.showFilter}/>
-                                <a className="title-panel-btn" onClick={this.savePanel}>保存</a>
-                                <a className="title-panel-btn" onClick={this.sharePanel}>分享</a>
-                                <a className="title-panel-btn" onClick={this.refreshPanel}>更新</a>
+                                <a className="title-panel-btn" onClick={this.savePanel}><Icon type="save" />保存</a>
+                                <a className="title-panel-btn" onClick={this.sharePanel}><Icon type="share-alt" />分享</a>
+                                <a className="title-panel-btn" onClick={this.refreshPanel}><Icon type="swap"/>更新</a>
                                 <Modal title="分享" visible={this.state.isShareShow}
                                        onOk={() => this.setState({isShareShow: false})}
                                        onCancel={() => this.setState({isShareShow: false})}
