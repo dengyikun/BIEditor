@@ -104,8 +104,11 @@ $rightAsideIndex: 800;
             @include single;
 
             i {
-              color: #108ee9;
               margin-right: $gap-sm;
+            }
+
+            &:hover {
+              color: #108ee9;
             }
           }
         }
@@ -259,15 +262,14 @@ $rightAsideIndex: 800;
   padding: 0;
 }
 
-.echart-style-dark {
+.echart-style-essos {
   width: 190px;
   height: 190px;
-  margin: 10px 10px 10px 0;
-  background: url("../images/echart-style-dark.png");
+  background: url("../images/echart-style-roma.png");
   background-size: 100% 100%;
 
   &:hover {
-    background: url("../images/echart-style-dark.png");
+    background: url("../images/echart-style-roma.png");
     background-size: 100% 100%;
   }
 }
@@ -297,18 +299,6 @@ $rightAsideIndex: 800;
   }
 }
 
-.echart-style-roma {
-  width: 190px;
-  height: 190px;
-  background: url("../images/echart-style-roma.png");
-  background-size: 100% 100%;
-
-  &:hover {
-    background: url("../images/echart-style-roma.png");
-    background-size: 100% 100%;
-  }
-}
-
 .echart-style-shine {
   width: 190px;
   height: 190px;
@@ -322,7 +312,7 @@ $rightAsideIndex: 800;
   }
 }
 
-.echart-style-vintage {
+.echart-style-walden {
   width: 190px;
   height: 190px;
   background: url("../images/echart-style-vintage.png");
@@ -334,8 +324,45 @@ $rightAsideIndex: 800;
   }
 }
 
+.echart-style-dark {
+  width: 190px;
+  height: 190px;
+  margin: 10px 10px 10px 0;
+  background: url("../images/echart-style-dark.png");
+  background-size: 100% 100%;
+
+  &:hover {
+    background: url("../images/echart-style-dark.png");
+    background-size: 100% 100%;
+  }
+}
+
 .ql-editor {
   padding: 20px;
+}
+
+.essos {
+  background: #ffffff !important;
+}
+
+.infographic {
+  background: #ffffff !important;
+}
+
+.macarons {
+  background: #ffffff !important;
+}
+
+.walden {
+  background: #ffffff !important;
+}
+
+.shine {
+  background: #ffffff !important;
+}
+
+.walden {
+  background: #ffffff !important;
 }
 
 .dark {
@@ -357,24 +384,4 @@ $rightAsideIndex: 800;
   tbody {
     color: #fff;
   }
-}
-
-.infographic {
-  background: #ffffff !important;
-}
-
-.macarons {
-  background: #ffffff !important;
-}
-
-.roma {
-  background: #ffffff !important;
-}
-
-.shine {
-  background: #ffffff !important;
-}
-
-.vintage {
-  background: #fef8ef !important;
 }

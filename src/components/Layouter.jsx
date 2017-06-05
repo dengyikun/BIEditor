@@ -461,14 +461,14 @@ class SetCard extends Component {
                 }}/>
             </Popover>
             <hr/>
-            <Button onClick={() => this.props.onStyleChange('dark')} className="echart-style-dark"/>
+            <Button onClick={() => this.props.onStyleChange('essos')} className="echart-style-essos"/>
             <Button onClick={() => this.props.onStyleChange('infographic')} className="echart-style-infographic"/>
             <br/>
             <Button onClick={() => this.props.onStyleChange('macarons')} className="echart-style-macarons"/>
-            <Button onClick={() => this.props.onStyleChange('roma')} className="echart-style-roma"/>
-            <br/>
             <Button onClick={() => this.props.onStyleChange('shine')} className="echart-style-shine"/>
-            <Button onClick={() => this.props.onStyleChange('vintage')} className="echart-style-vintage"/>
+            <br/>
+            <Button onClick={() => this.props.onStyleChange('walden')} className="echart-style-walden"/>
+            <Button onClick={() => this.props.onStyleChange('dark')} className="echart-style-dark"/>
         </div>
     )
 
