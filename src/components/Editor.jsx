@@ -76,9 +76,9 @@ class EditorUI extends Component {
                                 this.props.source.tableList.map((item) => {
                                     const columns = []
                                     item.columns.map((column) => {
-                                        columns.push(<TreeNode title={'列：' + column.name} key={column.name}/>)
+                                        columns.push(<TreeNode title={<i className="iconfont-bi icon-1">{column.name}</i>} key={column.name}/>)
                                     })
-                                    return <TreeNode title={'表：' + item.tableName} key={item.tableName}>
+                                    return <TreeNode title={<i className="iconfont-bi icon-biaoge">{item.tableName}</i>} key={item.tableName}>
                                         {columns}
                                     </TreeNode>
                                 })
@@ -106,7 +106,7 @@ class EditorUI extends Component {
                                         <div className="chart-set-select-table" onClick={() => this.setChartType("table")}></div>
                                     </div>
                                 }>
-                                    <Button icon="appstore" type="ghost" size="small">表&nbsp;&nbsp;&nbsp;格</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-icons17"/>表&nbsp;&nbsp;&nbsp;&nbsp;格</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-line">
@@ -118,7 +118,7 @@ class EditorUI extends Component {
                                         </div>
                                     </div>
                                 }>
-                                    <Button icon="line-chart" type="ghost" size="small">折线图</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-tubiao_zhexiantu"/>折线图</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-bar">
@@ -128,7 +128,7 @@ class EditorUI extends Component {
                                              onClick={() => this.setChartType("bar-y-category")}></div>
                                     </div>
                                 }>
-                                    <Button icon="bar-chart" type="ghost" size="small">柱状图</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-tubiao-zhuzhuangtu"/>柱状图</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-pie">
@@ -138,7 +138,7 @@ class EditorUI extends Component {
                                              onClick={() => this.setChartType("pie-doughnut")}></div>
                                     </div>
                                 }>
-                                    <Button icon="pie-chart" type="ghost" size="small">饼&nbsp;&nbsp;&nbsp;图</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-bingtu-kongxin"/>饼&nbsp;&nbsp;&nbsp;&nbsp;图</Button>
                                 </Popover>
                                 { false && <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-strip">
@@ -150,7 +150,7 @@ class EditorUI extends Component {
                                     <div className="chart-set-select-item chart-set-select-filter">
                                     </div>
                                 }>
-                                    <Button icon="filter" type="ghost" size="small">漏斗图</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-shaixuan"/>漏斗图</Button>
                                 </Popover>}
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-map">
@@ -158,7 +158,7 @@ class EditorUI extends Component {
                                              onClick={() => this.setChartType("map-china-dataRange")}></div>
                                     </div>
                                 }>
-                                    <Button icon="environment" type="ghost" size="small">地&nbsp;&nbsp;&nbsp;图</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-ditu"/>地&nbsp;&nbsp;&nbsp;&nbsp;图</Button>
                                 </Popover>
                                 <Popover placement="leftTop" content={
                                     <div className="chart-set-select-item chart-set-select-value">
@@ -166,7 +166,7 @@ class EditorUI extends Component {
                                              onClick={() => this.setChartType("unit-value")}></div>
                                     </div>
                                 }>
-                                    <Button icon="info" type="ghost" size="small">单&nbsp;&nbsp;&nbsp;值</Button>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-1"/>单&nbsp;&nbsp;&nbsp;&nbsp;值</Button>
                                 </Popover>
                             </div>
                             <hr/>

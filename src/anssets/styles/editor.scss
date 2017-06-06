@@ -67,6 +67,10 @@ html, body {
         font-weight: 600;
         margin-bottom: $gap-sm;
       }
+
+      i:before{
+        margin-right: $gap-sm;
+      }
     }
 
     .content-wrapper {
@@ -87,6 +91,10 @@ html, body {
 
           &.active {
             color: $mainColor;
+          }
+
+          i {
+            margin-right: $gap-sm;
           }
         }
 

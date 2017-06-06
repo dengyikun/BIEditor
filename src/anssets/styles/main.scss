@@ -23,13 +23,13 @@ $gap-xs: 4px;
   border-#{$ver}-#{$hor}-radius: $radius;
 }
 
-@mixin box-shadow($shadow){
+@mixin box-shadow($shadow) {
   -webkit-box-shadow: $shadow;
   -moz-box-shadow: $shadow;
   box-shadow: $shadow;
 }
 
-@mixin clearfix{
+@mixin clearfix {
   &::after {
     clear: both;
     display: table;
@@ -37,7 +37,7 @@ $gap-xs: 4px;
   }
 }
 
-@mixin single{
+@mixin single {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -56,3 +56,22 @@ $gap-xs: 4px;
 .ant-modal-content {
   border-radius: 0;
 }
+
+@font-face {
+  font-family: 'iconfont-bi';  /* project id 275303 */
+  src: url('http://at.alicdn.com/t/font_yur89fv4l8ebqpvi.eot');
+  src: url('http://at.alicdn.com/t/font_yur89fv4l8ebqpvi.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_yur89fv4l8ebqpvi.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_yur89fv4l8ebqpvi.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_yur89fv4l8ebqpvi.svg#iconfont') format('svg');
+}
+
+.iconfont-bi {
+  font-family: "iconfont-bi" !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@import url('//at.alicdn.com/t/font_yur89fv4l8ebqpvi.css');

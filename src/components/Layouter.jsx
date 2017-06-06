@@ -274,28 +274,31 @@ class LayouterUI extends Component {
                                                 let icon = "appstore"
                                                 switch (chart.type) {
                                                     case "table":
-                                                        icon = "bars"
+                                                        icon = "iconfont-bi icon-icons17"
+                                                        break
+                                                    case "unit-value":
+                                                        icon = "iconfont-bi icon-1"
                                                         break
                                                     case "line-stack":
-                                                        icon = "line-chart"
+                                                        icon = "iconfont-bi icon-tubiao_zhexiantu"
                                                         break
                                                     case "area-stack":
-                                                        icon = "line-chart"
+                                                        icon = "iconfont-bi icon-tubiao_zhexiantu"
                                                         break
                                                     case "bar-tick-align":
-                                                        icon = "bar-chart"
+                                                        icon = "iconfont-bi icon-tubiao-zhuzhuangtu"
                                                         break
                                                     case "bar-y-category":
-                                                        icon = "bar-chart"
+                                                        icon = "iconfont-bi icon-tubiao-zhuzhuangtu"
                                                         break
                                                     case "pie-simple":
-                                                        icon = "pie-chart"
+                                                        icon = "iconfont-bi icon-bingtu-kongxin"
                                                         break
                                                     case "pie-doughnut":
-                                                        icon = "pie-chart"
+                                                        icon = "iconfont-bi icon-bingtu-kongxin"
                                                         break
                                                     case "map-china-dataRange":
-                                                        icon = "environment"
+                                                        icon = "iconfont-bi icon-ditu"
                                                         break
                                                     default:
                                                         break
@@ -303,7 +306,7 @@ class LayouterUI extends Component {
                                                 return (
                                                     <li key={chart.chartId}
                                                         onClick={() => this.addChartItem(chart)}>
-                                                        <p><Icon type={icon}/>{chart.title}</p>
+                                                        <p><i className={icon}/>{chart.title}</p>
                                                     </li>
                                                 )
                                             })

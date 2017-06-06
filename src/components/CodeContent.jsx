@@ -203,10 +203,10 @@ class CodeContentUI extends Component {
             <div className="content-wrapper">
                 <div className="content-wrapper-title">
                     <div size="large">
-                        <Icon type="upload"/> 拖拽模式
+                        <i className="iconfont-bi icon-111zhuanhuan"/>拖拽模式
                     </div>
                     <div className="active" size="large">
-                        <Icon type="code"/> 代码模式
+                        <i className="iconfont-bi icon-yuandaima"/>代码模式
                     </div>
                 </div>
                 <div className="field-panel">
