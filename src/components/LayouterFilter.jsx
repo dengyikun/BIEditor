@@ -78,15 +78,12 @@ class LayouterFilterUI extends Component {
             codeChartSelectedId: chartId,
             codeChartSelectedFilter: newCodeValueList
         })
-
-        debugger
-
         this.props.setFilter(newFilter)
     }
 
     onFilterInput = (e) => {
+        debugger
         let newFilter = this.props.filter.slice()
-
         const value = e.target.value
         const name = e.target.name
 
@@ -94,6 +91,10 @@ class LayouterFilterUI extends Component {
             if (item.name === name) {
                 item.value = value
             }
+        })
+
+        this.setState({
+            codeChartSelectedFilter: newFilter[this.state.filterSelectedIndex].codeTable.codeValueList
         })
 
         this.props.setFilter(newFilter)

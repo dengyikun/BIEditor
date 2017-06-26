@@ -289,7 +289,7 @@ class Echart extends Component {
         let columns = []
         if (this.state.data.titles) {
             this.state.data.titles.map((title, index) => columns.push({
-                title: '姓名',
+                title: title,
                 key: index,
                 render: (text, record) => record[index]
             }))
