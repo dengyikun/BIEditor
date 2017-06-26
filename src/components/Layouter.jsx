@@ -127,8 +127,8 @@ class LayouterUI extends Component {
             y: this.state.maxHeight, // puts it at the bottom
             w: 20,
             h: 10,
-            minW: 10,
-            minH: 10
+            minW: 2,
+            minH: 2
         })
         newItems.push({
             id: id,
