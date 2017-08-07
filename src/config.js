@@ -10,7 +10,7 @@ const getDataApiHost = () => {
     let env = getEnv()
     let apiHost = ''
     if (env === 'dev') {
-        apiHost = 'http://222.85.149.5:3342'
+        apiHost = 'http://222.85.161.174:3342'
     }
     return apiHost
 }
@@ -19,7 +19,7 @@ const getMgmtApiHost = () => {
     let env = getEnv()
     let apiHost = ''
     if (env === 'dev') {
-        apiHost = 'http://222.85.149.5:3343'
+        apiHost = 'http://222.85.161.174:3343'
     }
     return apiHost
 }

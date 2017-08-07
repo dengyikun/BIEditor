@@ -365,7 +365,8 @@ class Echart extends Component {
                                 {this.state.name || ''}
                             </div>
                             <div className="unit-value-value">
-                                {this.state.value || ''}
+                                {this.state.value || this.state.value === 0 ?
+                                    this.state.value : '暂无数据'}
                             </div>
                         </div>
                     }

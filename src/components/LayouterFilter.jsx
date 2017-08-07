@@ -64,6 +64,19 @@ class LayouterFilterUI extends Component {
         })
     }
 
+    onFilterDelete = (filterIndex) => {
+        debugger
+        let newFilter = this.props.filter.slice()
+
+        newFilter.splice(filterIndex, 1)
+
+        this.setState({
+            filterSelectedIndex: -1
+        })
+
+        this.props.setFilter(newFilter)
+    }
+
     onCodeChartSelect = (e) => {
         let newFilter = this.props.filter.slice()
 
@@ -145,7 +158,8 @@ class LayouterFilterUI extends Component {
                                         overflow: 'hidden',
                                         textOverflow: 'ellipsis',
                                         whiteSpace: 'nowrap',
-                                    }} onClick={() => this.onFilterSelect(index)} key={index}>
+                                    }} {...(index === this.state.filterSelectedIndex ?
+                                        null : {onClick: () => this.onFilterSelect(index)})} key={index}>
                                         {
                                             index === this.state.filterSelectedIndex ?
                                                 <div style={{
@@ -154,10 +168,16 @@ class LayouterFilterUI extends Component {
                                                     backgroundSize: 'auto 20%',
                                                     paddingLeft: 40,
                                                     marginLeft: -20,
+                                                    marginRight: -20,
+                                                    paddingRight: 20,
                                                     overflow: 'hidden',
                                                     textOverflow: 'ellipsis',
                                                     whiteSpace: 'nowrap',
-                                                }}>{item.name}</div> : item.name
+                                                }}>{item.name}<Icon type="delete" style={{
+                                                    float: 'right',
+                                                    marginRight: -20,
+                                                    lineHeight: '30px',
+                                                }} onClick={() => this.onFilterDelete(index)}/></div> : item.name
                                         }
                                     </div>
                                 })
