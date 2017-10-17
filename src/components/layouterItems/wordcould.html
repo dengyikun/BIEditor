@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<div id = "main" style="width: 1200px;height: 800px;"></div>
+<script type="text/javascript" src = "https://cdn.bootcss.com/echarts/3.6.2/echarts.min.js"></script>
+<script type="text/javascript" src = "http://data-visual.cn/datav/src/js/echarts/extension/echarts-wordcloud.min.js"></script>
+<script type="text/javascript">
+    var data = [];
+    var option = {
+        title: {
+            text: '搜索指数',
+            x: 'center',
+            textStyle: {
+                fontSize: 23
+            }
+
+        },
+        tooltip: {},
+        backgroundColor: '#F7F7F7',
+        series: [{
+            name: '搜索指数',
+            type: 'wordCloud',
+            //size: ['9%', '99%'],
+            sizeRange: [12, 80],
+            //textRotation: [0, 45, 90, -45],
+            rotationRange: [-45, 90],
+            //shape: 'circle',
+            textPadding: 0,
+            autoSize: {
+                enable: true,
+                minSize: 6
+            },
+            textStyle: {
+                normal: {
+                    color: function() {
+                        return 'rgb(' + [
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160),
+                                    Math.round(Math.random() * 160)
+                                ].join(',') + ')';
+                    }
+                },
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowColor: '#333'
+                }
+            },
+            data: [{"value":12,"name":"美美娱乐","itemStyle":{"normal":{"color":"rgb(15,111,155)"}}},{"value":12,"name":"女人智慧语录","itemStyle":{"normal":{"color":"rgb(17,97,19)"}}},{"value":8,"name":"贵州大小事","itemStyle":{"normal":{"color":"rgb(140,146,38)"}}},{"value":8,"name":"贵州省招生考试院","itemStyle":{"normal":{"color":"rgb(122,94,59)"}}},{"value":7,"name":"微七星关","itemStyle":{"normal":{"color":"rgb(107,125,99)"}}},{"value":6,"name":"多彩贵州网","itemStyle":{"normal":{"color":"rgb(110,111,81)"}}},{"value":6,"name":"贵州山歌","itemStyle":{"normal":{"color":"rgb(23,140,150)"}}},{"value":5,"name":"詹姆士的厨房","itemStyle":{"normal":{"color":"rgb(95,105,68)"}}},{"value":4,"name":"生如夏花","itemStyle":{"normal":{"color":"rgb(133,76,2)"}}},{"value":4,"name":"微感悟","itemStyle":{"normal":{"color":"rgb(68,139,159)"}}},{"value":4,"name":"气贯长虹","itemStyle":{"normal":{"color":"rgb(3,125,57)"}}},{"value":3,"name":"娱你同乐","itemStyle":{"normal":{"color":"rgb(7,98,108)"}}},{"value":3,"name":"唯美句子语录","itemStyle":{"normal":{"color":"rgb(140,17,105)"}}},{"value":3,"name":"易经风水智慧","itemStyle":{"normal":{"color":"rgb(95,73,49)"}}},{"value":3,"name":"贵阳通","itemStyle":{"normal":{"color":"rgb(92,133,2)"}}},{"value":3,"name":"贵州省人民政府网","itemStyle":{"normal":{"color":"rgb(159,118,95)"}}},{"value":3,"name":"优优美文","itemStyle":{"normal":{"color":"rgb(131,89,47)"}}},{"value":2,"name":"相约遵义","itemStyle":{"normal":{"color":"rgb(65,19,89)"}}},{"value":2,"name":"娱乐龙卷风","itemStyle":{"normal":{"color":"rgb(24,145,100)"}}},{"value":2,"name":"毕节老街坊","itemStyle":{"normal":{"color":"rgb(20,88,127)"}}},{"value":2,"name":"百姓关注","itemStyle":{"normal":{"color":"rgb(82,157,142)"}}},{"value":2,"name":"微测试","itemStyle":{"normal":{"color":"rgb(153,137,61)"}}},{"value":2,"name":"音乐美文美图","itemStyle":{"normal":{"color":"rgb(150,108,118)"}}},{"value":2,"name":"铁血军迷集中营","itemStyle":{"normal":{"color":"rgb(105,57,25)"}}},{"value":2,"name":"风水财运算命馆","itemStyle":{"normal":{"color":"rgb(51,31,53)"}}},{"value":1,"name":"爱服装爱时尚","itemStyle":{"normal":{"color":"rgb(77,139,0)"}}},{"value":1,"name":"掌上黔东南","itemStyle":{"normal":{"color":"rgb(123,89,51)"}}},{"value":1,"name":"幽默搞笑视频","itemStyle":{"normal":{"color":"rgb(42,94,72)"}}},{"value":1,"name":"娄山关","itemStyle":{"normal":{"color":"rgb(77,115,19)"}}},{"value":1,"name":"中天未来方舟","itemStyle":{"normal":{"color":"rgb(34,140,155)"}}},{"value":1,"name":"怪噜范","itemStyle":{"normal":{"color":"rgb(34,160,48)"}}},{"value":1,"name":"贵州发布","itemStyle":{"normal":{"color":"rgb(44,79,17)"}}},{"value":1,"name":"贵阳微视","itemStyle":{"normal":{"color":"rgb(144,126,124)"}}},{"value":1,"name":"尚格法律人","itemStyle":{"normal":{"color":"rgb(71,152,116)"}}},{"value":1,"name":"相约贵阳","itemStyle":{"normal":{"color":"rgb(95,111,125)"}}},{"value":1,"name":"正安001","itemStyle":{"normal":{"color":"rgb(52,30,50)"}}},{"value":1,"name":"这个绝对有意思","itemStyle":{"normal":{"color":"rgb(91,20,133)"}}},{"value":1,"name":"贵州热门事件","itemStyle":{"normal":{"color":"rgb(95,26,83)"}}},{"value":1,"name":"贵州大街小巷","itemStyle":{"normal":{"color":"rgb(24,116,16)"}}},{"value":1,"name":"仁怀在线","itemStyle":{"normal":{"color":"rgb(30,53,146)"}}},{"value":1,"name":"手机摄影技巧","itemStyle":{"normal":{"color":"rgb(7,107,69)"}}},{"value":1,"name":"衷曲无闻","itemStyle":{"normal":{"color":"rgb(104,64,143)"}}},{"value":1,"name":"服务贵州","itemStyle":{"normal":{"color":"rgb(110,21,53)"}}},{"value":1,"name":"掌上德江","itemStyle":{"normal":{"color":"rgb(35,128,2)"}}},{"value":1,"name":"掌上思南","itemStyle":{"normal":{"color":"rgb(115,41,51)"}}},{"value":1,"name":"黔西便民网","itemStyle":{"normal":{"color":"rgb(118,87,78)"}}},{"value":1,"name":"贵阳美食","itemStyle":{"normal":{"color":"rgb(113,139,3)"}}},{"value":1,"name":"刑事法律实务","itemStyle":{"normal":{"color":"rgb(66,127,141)"}}},{"value":1,"name":"非常完美官微","itemStyle":{"normal":{"color":"rgb(51,131,1)"}}},{"value":1,"name":"微微桐梓","itemStyle":{"normal":{"color":"rgb(40,33,110)"}}}]
+        }]
+    };
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.setOption(option);
+    window.onresize = function() {
+        myChart.resize();
+    }
+</script>
+</body>
+</html>

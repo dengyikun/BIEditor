@@ -35,7 +35,7 @@ class EditorUI extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: true,
+            loading: false,
         }
     }//初始化 state
 
@@ -167,6 +167,14 @@ class EditorUI extends Component {
                                     </div>
                                 }>
                                     <Button type="ghost" size="small"><i className="iconfont-bi icon-1"/>单&nbsp;&nbsp;&nbsp;&nbsp;值</Button>
+                                </Popover>
+                                <Popover placement="leftTop" content={
+                                    <div className="chart-set-select-item chart-set-select-value">
+                                        <div className="chart-set-select-unit-value"
+                                             onClick={() => this.setChartType("word-cloud")}></div>
+                                    </div>
+                                }>
+                                    <Button type="ghost" size="small"><i className="iconfont-bi icon-1"/>词&nbsp;&nbsp;&nbsp;&nbsp;云</Button>
                                 </Popover>
                             </div>
                             <hr/>
