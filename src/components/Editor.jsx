@@ -55,6 +55,7 @@ class EditorUI extends Component {
         dataSet.type = type
         this.props.setDataSetType(type)
         this.props.getChart(dataSet)
+        debugger
     }
 
     render() {

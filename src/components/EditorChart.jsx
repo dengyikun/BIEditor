@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react'
 import {connect} from 'react-redux'
 import echarts from 'echarts'
 import 'echarts/map/js/china.js'
+import '../anssets/js/echarts-wordcloud.min'
 import ReactScrollbar from 'react-custom-scrollbars'
 import {Table} from 'antd'
 

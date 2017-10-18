@@ -115,6 +115,7 @@ const actions = {
                         style: getState().chartSet.style
                     }
                     const chart = data.data
+
                     let option = {
                         type: set.type,
                         title: {
@@ -280,6 +281,43 @@ const actions = {
                             }
                             option.series[0].top = '90px'
                             option.series[0].bottom = '30px'
+                            break
+                        case "word-cloud":
+                            option = {
+                                ...option,
+                                tooltip: {},
+                                xAxis: null,
+                                yAxis: null,
+                                series: [{
+                                    type: 'wordCloud',
+                                    //size: ['9%', '99%'],
+                                    sizeRange: [12, 80],
+                                    //textRotation: [0, 45, 90, -45],
+                                    rotationRange: [-45, 90],
+                                    //shape: 'circle',
+                                    textPadding: 0,
+                                    autoSize: {
+                                        enable: true,
+                                        minSize: 6
+                                    },
+                                    textStyle: {
+                                        normal: {
+                                            color: function() {
+                                                return 'rgb(' + [
+                                                        Math.round(Math.random() * 160),
+                                                        Math.round(Math.random() * 160),
+                                                        Math.round(Math.random() * 160)
+                                                    ].join(',') + ')';
+                                            }
+                                        },
+                                        emphasis: {
+                                            shadowBlur: 10,
+                                            shadowColor: '#333'
+                                        }
+                                    },
+                                    data: chart
+                                }]
+                            }
                             break
                         default:
                             break

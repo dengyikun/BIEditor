@@ -5,6 +5,7 @@ import React, {Component, PropTypes} from 'react'
 import {Table, Icon, Menu, Dropdown, Modal} from 'antd'
 import ReactScrollbar from 'react-custom-scrollbars'
 import echarts from 'echarts'
+import '../../anssets/js/echarts-wordcloud.min'
 import 'echarts/map/js/china'
 import 'echarts/theme/dark'
 import 'echarts/theme/infographic'
@@ -234,6 +235,43 @@ class Echart extends Component {
                                 }
                                 option.series[0].top = '90px'
                                 option.series[0].bottom = '30px'
+                                break
+                            case "word-cloud":
+                                option = {
+                                    ...option,
+                                    tooltip: {},
+                                    xAxis: null,
+                                    yAxis: null,
+                                    series: [{
+                                        type: 'wordCloud',
+                                        //size: ['9%', '99%'],
+                                        sizeRange: [12, 80],
+                                        //textRotation: [0, 45, 90, -45],
+                                        rotationRange: [-45, 90],
+                                        //shape: 'circle',
+                                        textPadding: 0,
+                                        autoSize: {
+                                            enable: true,
+                                            minSize: 6
+                                        },
+                                        textStyle: {
+                                            normal: {
+                                                color: function() {
+                                                    return 'rgb(' + [
+                                                            Math.round(Math.random() * 160),
+                                                            Math.round(Math.random() * 160),
+                                                            Math.round(Math.random() * 160)
+                                                        ].join(',') + ')';
+                                                }
+                                            },
+                                            emphasis: {
+                                                shadowBlur: 10,
+                                                shadowColor: '#333'
+                                            }
+                                        },
+                                        data: chart
+                                    }]
+                                }
                                 break
                             default:
                                 break
